@@ -3,7 +3,7 @@ Storage
 React:
 cd reactFrontend
 npm install
-npm strat
+npm start
 
 npx create-react-app reactFrontend
 cd reactFrontend
