@@ -69,6 +69,13 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 
 React:
+cd reactFrontend
+npm install
+npm start
+start java application
+http://localhost:3000
+
+
 npx create-react-app reactFrontend
 cd reactFrontend
 npm install axios --save
