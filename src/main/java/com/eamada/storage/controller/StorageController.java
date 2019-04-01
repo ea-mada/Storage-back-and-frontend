@@ -30,7 +30,7 @@ public class StorageController {
 	private CustomerService service;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public Collection<Customer> geCustomers() {
+	public Collection<Customer> getCustomers() {
 		return this.service.getCustomers();
 	}
 	
