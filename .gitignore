@@ -55,4 +55,4 @@
 hs_err_pid*
 reactFrontend/node_modules/
 reactFrontend/build/
-reactFrontend/public/
+#reactFrontend/public/
