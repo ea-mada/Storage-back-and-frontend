@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../CSS/Prefill.css';
+import { Z_BLOCK } from 'zlib';
 
 class Prefill extends Component {
 
@@ -88,6 +89,8 @@ class Prefill extends Component {
 
       this.setState({customerGotFromPrefillingVatcode: res.data.vatCode, customerGotFromPrefillingName: res.data.name, customerGotFromPrefillingAddress: res.data.address, customerGotFromPrefillingPhonenumber: res.data.phoneNumber, customerGotFromPrefillingIban: res.data.iban, customerGotFromPrefillingNotes: res.data.notes});
       console.log(res.data)
+
+      document.getElementById('edit').style.display = 'block';
     });
   }
 
@@ -119,6 +122,8 @@ class Prefill extends Component {
 
       this.setState({customerGotFromPrefillingVatcode: res.data.vatCode, customerGotFromPrefillingName: res.data.name, customerGotFromPrefillingAddress: res.data.address, customerGotFromPrefillingPhonenumber: res.data.phoneNumber, customerGotFromPrefillingIban: res.data.iban, customerGotFromPrefillingNotes: res.data.notes});
       console.log(res.data)
+
+      document.getElementById('edit').style.display = 'block';
     });
   }
 
@@ -184,7 +189,7 @@ class Prefill extends Component {
                 <label htmlFor="notes">notes:</label>
                 <input type="text" className="form-control" name="notes" value={notes} onChange={this.onChangeNonAutoField} placeholder="notes" />
               </div>
-              <button name="onlyButtonInForm" id="add" type="submit">Edit Customer</button>
+              <button name="onlyButtonInForm" id="edit" type="submit">Edit Customer</button>
       </form>
       
       </div>
