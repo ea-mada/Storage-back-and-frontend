@@ -23,16 +23,16 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <div className="panel panel-default">
+        {/* <div className="panel panel-default">
           <div className="panel-heading">
             <h3 className="panel-title">
               CUSTOMER LIST
             </h3>
-          </div>
+          </div> */}
           <div className="panel-body">
             <h4><Link to="/create"><span className="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Customer</Link></h4>
             <h4><Link to="/prefill"><span className="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Pre-fill Customer</Link></h4>
-            <table className="table table-stripe">
+            {/* <table className="table table-stripe">
               <thead>
                 <tr>
                   <th>vatCode</th>
@@ -48,7 +48,7 @@ class App extends Component {
                 )}
               </tbody>
             </table>
-          </div>
+          </div> */}
         </div>
       </div>
     );
