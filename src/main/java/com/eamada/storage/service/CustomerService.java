@@ -30,15 +30,23 @@ public class CustomerService {
 	private CustomerRepository customerRepository;
 	private ItemRepository itemRepository;
 	
-	@Transient
-	private Set<CustomerNameAndIdKeeper> customerNamesAndIds = new 
-		TreeSet<>((c1, c2) -> c1.getName().toLowerCase()
-		.compareTo(c2.getName().toLowerCase()));
+//	@Transient
+//	private Set<CustomerNameAndIdKeeper> customerNamesAndIds = new 
+//		TreeSet<>((c1, c2) -> c1.getName().toLowerCase()
+//		.compareTo(c2.getName().toLowerCase()));
 	
 	@Transient
-	private Set<CustomerVatcodeAndIdKepper> customerVatcodesAndIds = new 
-		TreeSet<>((c1, c2) -> c1.getVatCode().toLowerCase()
-		.compareTo(c2.getVatCode().toLowerCase()));
+	private List<CustomerNameAndIdKeeper> customerNamesAndIds = new 
+		ArrayList<>();
+	
+//	@Transient
+//	private Set<CustomerVatcodeAndIdKepper> customerVatcodesAndIds = new 
+//		TreeSet<>((c1, c2) -> c1.getVatCode().toLowerCase()
+//		.compareTo(c2.getVatCode().toLowerCase()));
+	
+	@Transient
+	private List<CustomerVatcodeAndIdKepper> customerVatcodesAndIds = new 
+		ArrayList<>();
 	
 	@Autowired
 	public CustomerService(CustomerRepository customerRepository,
