@@ -12,13 +12,6 @@ class Prefill extends Component {
       customerNamesAndIds: [],
       customerVatcodesAndIds: [],
 
-      customerGotFromPrefillingVatcode: '',
-      customerGotFromPrefillingName: '',
-      customerGotFromPrefillingAddress: '',
-      customerGotFromPrefillingPhonenumber: '',
-      customerGotFromPrefillingIban: '',
-      customerGotFromPrefillingNotes: '',
-
       customer: {}
     };
   }
@@ -77,7 +70,7 @@ class Prefill extends Component {
 
     axios.get('http://localhost:8080/api/storage/'+ customerid)
     .then(res => {
-      this.setState({ name: res.data.name, address: res.data.address, phoneNumber: res.data.phoneNumber, iban: res.data.iban });
+      this.setState({ customerid: res.data.customerid, name: res.data.name, address: res.data.address, phoneNumber: res.data.phoneNumber, iban: res.data.iban });
       if (res.data.vatCode != null) {
         this.setState({vatCode: res.data.vatCode});
       } else {
@@ -136,8 +129,9 @@ class Prefill extends Component {
   }
 
   onSubmit = (e) => {
-    e.preventDefault();
-    
+    const { customerid, vatCode, name, address, phoneNumber, iban, notes } = this.state;
+    console.log(vatCode)
+    axios.put('http://localhost:8080/api/storage/'+ customerid, { name, vatCode, address, phoneNumber, iban, notes });
   }
 
   render() {
@@ -146,7 +140,7 @@ class Prefill extends Component {
       <div className="container">
       <form onSubmit={this.onSubmit} autoComplete="off">
       <div>
-      <label htmlFor="vatCode">VatCode fragment/or full VatCode for new Customer:</label>
+      <label htmlFor="vatCode">VatCode:</label>
                 <input id="customerVatcodeFragmentId" onChange={this.onChangeVatcodeField} type="text" className="form-control" name="vatCode" value={vatCode} placeholder="vatCode" />
       </div>
       <table>
@@ -160,7 +154,7 @@ class Prefill extends Component {
       </table>
 
       <div className="form-group">
-                <label htmlFor="name">name fragment/or full name for new Customer:</label>
+                <label htmlFor="name">Name:</label>
                 <input id="customerNameFragmentId" type="text" className="form-control" name="name" value={name} onChange={this.onChangeNameField} placeholder="customer name" />
               </div>
               
@@ -190,7 +184,7 @@ class Prefill extends Component {
                 <label htmlFor="notes">notes:</label>
                 <input type="text" className="form-control" name="notes" value={notes} onChange={this.onChangeNonAutoField} placeholder="notes" />
               </div>
-              <button name="onlyButtonInForm" id="add" type="submit">Add New Customer</button>
+              <button name="onlyButtonInForm" id="add" type="submit">Edit Customer</button>
       </form>
       
       </div>
