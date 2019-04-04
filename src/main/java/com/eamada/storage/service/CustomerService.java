@@ -1,5 +1,6 @@
 package com.eamada.storage.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -155,18 +156,25 @@ public class CustomerService {
 	public List<CustomerNameAndIdKeeper> getCustomersWithNamesMatching
 			(String customerNameFragment) {
 		return this.customerNamesAndIds.stream()
+		.limit(500000)
 		.filter(c -> c.getName().toLowerCase()
 		.contains(customerNameFragment.toLowerCase()))
 		.limit(21)
+		.sorted((c1, c2) -> c1.getName().toLowerCase().indexOf(customerNameFragment)
+				- c2.getName().toLowerCase().indexOf(customerNameFragment))
 		.collect(Collectors.toList());
 	}
 	
 	public List<CustomerVatcodeAndIdKepper> getCustomersMatchingVatcode
 	(String customerVatcodeFragment) {
+		
 		return this.customerVatcodesAndIds.stream()
+		.limit(500000)
 		.filter(c -> c.getVatCode().toLowerCase()
 		.contains(customerVatcodeFragment.toLowerCase()))
 		.limit(21)
+		.sorted((c1, c2) -> c1.getVatCode().toLowerCase().indexOf(customerVatcodeFragment)
+				- c2.getVatCode().toLowerCase().indexOf(customerVatcodeFragment))
 		.collect(Collectors.toList());
 }
 }
