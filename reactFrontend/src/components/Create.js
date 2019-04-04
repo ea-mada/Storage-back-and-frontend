@@ -47,28 +47,28 @@ class Create extends Component {
             <h4><Link to="/"><span className="glyphicon glyphicon-th-list" aria-hidden="true"></span> Customer List</Link></h4>
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
-                <label htmlFor="vatCode">vatCode:</label>
-                <input type="text" className="form-control" name="vatCode" value={vatCode} onChange={this.onChange} placeholder="vatCode" />
+                <label htmlFor="vatCode">VAT code:</label>
+                <input type="text" className="form-control" name="vatCode" value={vatCode} onChange={this.onChange} placeholder="LT123456789" required pattern="LT\d{9}" />
               </div>
               <div className="form-group">
-                <label htmlFor="writingDate">name:</label>
-                <input type="text" className="form-control" name="name" value={name} onChange={this.onChange} placeholder="name" />
+                <label htmlFor="writingDate">Name*:</label>
+                <input type="text" className="form-control" name="name" value={name} onChange={this.onChange} placeholder="Name" pattern="[A-Z]{1}[a-z]+" required />
               </div>
               <div className="form-group">
-                <label htmlFor="address">WhatCompanyWrote:</label>
-                <input type="text" className="form-control" name="address" value={address} onChange={this.onChange} placeholder="address" />
+                <label htmlFor="address">Address*:</label>
+                <input type="text" className="form-control" name="address" value={address} onChange={this.onChange} placeholder="address" required />
               </div>
               <div className="form-group">
-                <label htmlFor="phoneNumber">phoneNumber:</label>
-                <input type="text" className="form-control" name="phoneNumber" value={phoneNumber} onChange={this.onChange} placeholder="Phone Number" />
+                <label htmlFor="phoneNumber">Phone number*:</label>
+                <input type="text" className="form-control" name="phoneNumber" value={phoneNumber} onChange={this.onChange} placeholder="Phone Number" pattern="\+370-\d{3}-\d{5}" />
               </div>
               <div className="form-group">
-                <label htmlFor="iban">iban:</label>
-                <input type="text" className="form-control" name="iban" value={iban} onChange={this.onChange} placeholder="iban" />
+                <label htmlFor="iban">IBAN*:</label>
+                <input type="text" className="form-control" name="iban" value={iban} onChange={this.onChange} placeholder="LT012345678901234567" required pattern="LT\d{18}" />
               </div>
               <div className="form-group">
                 <label htmlFor="phoneNumber">notes:</label>
-                <input type="text" className="form-control" name="notes" value={notes} onChange={this.onChange} placeholder="notes" />
+                <input type="text" className="form-control" name="notes" value={notes} onChange={this.onChange} placeholder="text" />
               </div>
               <button type="submit" className="btn btn-default">Submit</button>
             </form>
