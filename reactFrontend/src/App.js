@@ -13,7 +13,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:8080/api/storage/')
+    axios.get('http://localhost:8080/api/storage/customers/getCustomers')
       .then(res => {
         this.setState({ customers: res.data });
         console.log(this.state.customers);
@@ -30,8 +30,8 @@ class App extends Component {
             </h3>
           </div>
           <div className="panel-body">
-            <h4><Link to="/create"><span className="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Customer</Link></h4>
-            <h4><Link to="/prefill"><span className="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Pre-fill Customer</Link></h4>
+            <h4><Link to="/customers/addCustomer"><span className="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Customer</Link></h4>
+            <h4><Link to="/customers/prefillCustomer"><span className="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Pre-fill Customer</Link></h4>
             <table className="table table-stripe">
               <thead>
                 <tr>

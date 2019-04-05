@@ -27,7 +27,7 @@ class Prefill extends Component {
     document.getElementById('customerNameFragmentId').style.borderColor = "black";
 
     if (temporary.trim() != '') {
-      axios.get('http://localhost:8080/api/storage/customers/prefill/'+  temporary+ "/" )
+      axios.get('http://localhost:8080/api/storage/customers/prefillName/'+  temporary+ "/" )
       .then(res => {
         this.setState({ customerNamesAndIds: res.data });
 
@@ -49,7 +49,7 @@ class Prefill extends Component {
     document.getElementById('customerVatcodeFragmentId').style.borderColor = "black";
 
     if (temporary.trim() != '') {
-      axios.get('http://localhost:8080/api/storage/customers/prefill/vatcode/'+  temporary+ "/" )
+      axios.get('http://localhost:8080/api/storage/customers/prefillVatcode/'+  temporary+ "/" )
       .then(res => {
         this.setState({ customerVatcodesAndIds: res.data });
 
@@ -69,7 +69,7 @@ class Prefill extends Component {
     this.setState({ name: temporary })
     this.setState({ customerNamesAndIds: [] });
 
-    axios.get('http://localhost:8080/api/storage/'+ customerid)
+    axios.get('http://localhost:8080/api/storage/customers/getCustomer/'+ customerid)
     .then(res => {
       this.setState({ customerid: res.data.customerid, name: res.data.name, address: res.data.address, phoneNumber: res.data.phoneNumber, iban: res.data.iban });
       if (res.data.vatCode != null) {
@@ -102,7 +102,7 @@ class Prefill extends Component {
     this.setState({ vatCode: temporary })
     this.setState({ customerVatcodesAndIds: [] });
 
-    axios.get('http://localhost:8080/api/storage/'+ customerid)
+    axios.get('http://localhost:8080/api/storage/customers/getCustomer/'+ customerid)
     .then(res => {
       this.setState({ name: res.data.name, address: res.data.address, phoneNumber: res.data.phoneNumber, iban: res.data.iban });
       if (res.data.vatCode != null) {
@@ -136,14 +136,14 @@ class Prefill extends Component {
   onSubmit = (e) => {
     const { customerid, vatCode, name, address, phoneNumber, iban, notes } = this.state;
     console.log(vatCode)
-    axios.put('http://localhost:8080/api/storage/'+ customerid, { name, vatCode, address, phoneNumber, iban, notes });
+    axios.put('http://localhost:8080/api/storage/customers/setCustomer/'+ customerid, { name, vatCode, address, phoneNumber, iban, notes });
   }
 
   render() {
     const { customerNamesAndIds, customerVatcodesAndIds, vatCode, name, address, phoneNumber, iban, notes } = this.state;
     return (
       <div className="container">
-      <h4><Link to="/"><span className="glyphicon glyphicon-th-list" aria-hidden="true"></span> Customer List</Link></h4>
+      <h4><Link to="/customers"><span className="glyphicon glyphicon-th-list" aria-hidden="true"></span> Customer List</Link></h4>
       <form onSubmit={this.onSubmit} autoComplete="off">
       <div>
       <label htmlFor="vatCode">VatCode:</label>
@@ -175,7 +175,7 @@ class Prefill extends Component {
       </table>
 
       <div className="form-group">
-                <label htmlFor="address">WhatCompanyWrote:</label>
+                <label htmlFor="address">Address:</label>
                 <input type="text" className="form-control" name="address" value={address} onChange={this.onChangeNonAutoField} placeholder="address" />
               </div>
               <div className="form-group">

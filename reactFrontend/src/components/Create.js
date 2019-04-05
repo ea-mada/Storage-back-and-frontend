@@ -27,9 +27,9 @@ class Create extends Component {
 
     const { vatCode, name, address, phoneNumber, iban, notes } = this.state;
 
-    axios.post('http://localhost:8080/api/storage', { vatCode, name, address, phoneNumber, iban, notes })
+    axios.post('http://localhost:8080/api/storage/customers/addCustomer', { vatCode, name, address, phoneNumber, iban, notes })
       .then((result) => {
-        this.props.history.push("/")
+        this.props.history.push("/customers")
       });
   }
 
@@ -44,7 +44,7 @@ class Create extends Component {
             </h3>
           </div>
           <div className="panel-body">
-            <h4><Link to="/"><span className="glyphicon glyphicon-th-list" aria-hidden="true"></span> Customer List</Link></h4>
+            <h4><Link to="/customers"><span className="glyphicon glyphicon-th-list" aria-hidden="true"></span> Customer List</Link></h4>
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <label htmlFor="vatCode">VAT code:</label>

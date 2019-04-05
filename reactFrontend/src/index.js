@@ -10,9 +10,9 @@ import Prefill from './components/Prefill';
 ReactDOM.render(
   <Router>
       <div>
-        <Route exact path='/' component={App} />
-        <Route path='/create' component={Create} />
-        <Route path='/prefill' component={Prefill} />
+        <Route exact path='/customers' component={App} />
+        <Route path='/customers/addCustomer' component={Create} />
+        <Route path='/customers/prefillCustomer' component={Prefill} />
       </div>
   </Router>,
   document.getElementById('root')

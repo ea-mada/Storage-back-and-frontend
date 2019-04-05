@@ -29,12 +29,12 @@ public class StorageController {
 	@Autowired
 	private CustomerService service;
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(path = "/customers/getCustomers", method = RequestMethod.GET)
 	public Collection<Customer> getCustomers() {
 		return this.service.getCustomers();
 	}
 	
-	@RequestMapping(path = "/{customerid}", method = RequestMethod.GET)
+	@RequestMapping(path = "/customers/getCustomer/{customerid}", method = RequestMethod.GET)
 	public Customer getCustomer(@PathVariable @Valid Long customerid) {
 		return this.service.getCustomer(customerid);
 	}
@@ -44,7 +44,7 @@ public class StorageController {
 		return this.service.getItems(customerid);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(path = "/customers/addCustomer", method = RequestMethod.POST)
 	public ResponseEntity<Customer> addCustomer(@RequestBody @Valid CreateCustomerCommand
 			createCustomerCommand) {
 		return this.service.addCustomer(createCustomerCommand);
@@ -56,7 +56,7 @@ public class StorageController {
 		return this.service.addItem(customerid, createItemCommand);
 	}
 	
-	@RequestMapping(path = "/{customerid}", method = RequestMethod.PUT)
+	@RequestMapping(path = "/customers/setCustomer/{customerid}", method = RequestMethod.PUT)
 	public Customer modifyCustomer(@PathVariable final Long customerid,
 			@RequestBody CreateCustomerCommand createCustomerCommand) {
 		return this.service.modifyCustomer(customerid, createCustomerCommand);
@@ -68,7 +68,7 @@ public class StorageController {
 		return this.service.modifyItem(itemid, createItemCommand);
 	}
 	
-	@RequestMapping(path = "{customerid}", method = RequestMethod.DELETE)
+	@RequestMapping(path = "/customers/deleteCustomer/{customerid}", method = RequestMethod.DELETE)
 	public String deleteCustomer(@PathVariable final Long customerid) {
 		return this.service.deleteCustomer(customerid);
 	}
@@ -78,14 +78,14 @@ public class StorageController {
 		return this.service.deleteItem(itemid);
 	}
 
-	@RequestMapping(path = "/customers/prefill/{customerNameFragment}",
+	@RequestMapping(path = "/customers/prefillName/{customerNameFragment}",
 			method = RequestMethod.GET)
 	public List<CustomerNameAndIdKeeper> getCustomersThatMatchesString(@PathVariable 
 			final String customerNameFragment) {
 		return this.service.getCustomersWithNamesMatching(customerNameFragment);
 	}
 	
-	@RequestMapping(path = "/customers/prefill/vatcode/{customerVatcodeFragment}",
+	@RequestMapping(path = "/customers/prefillVatcode/{customerVatcodeFragment}",
 			method = RequestMethod.GET)
 	public List<CustomerVatcodeAndIdKepper> getCustomersMatchingVatCode(@PathVariable 
 			final String customerVatcodeFragment) {
