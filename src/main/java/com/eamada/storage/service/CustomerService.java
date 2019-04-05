@@ -168,8 +168,8 @@ public class CustomerService {
 		.filter(c -> c.getName().toLowerCase()
 		.contains(customerNameFragment.toLowerCase()))
 		.limit(21)
-		.sorted((c1, c2) -> c1.getName().toLowerCase().indexOf(customerNameFragment)
-				- c2.getName().toLowerCase().indexOf(customerNameFragment))
+		.sorted((c1, c2) -> c1.getName().toLowerCase().indexOf(customerNameFragment.toLowerCase())
+				- c2.getName().toLowerCase().indexOf(customerNameFragment.toLowerCase()))
 		.collect(Collectors.toList());
 	}
 	
@@ -181,8 +181,8 @@ public class CustomerService {
 		.filter(c -> c.getVatCode().toLowerCase()
 		.contains(customerVatcodeFragment.toLowerCase()))
 		.limit(21)
-		.sorted((c1, c2) -> c1.getVatCode().toLowerCase().indexOf(customerVatcodeFragment)
-				- c2.getVatCode().toLowerCase().indexOf(customerVatcodeFragment))
+		.sorted((c1, c2) -> c1.getVatCode().toLowerCase().indexOf(customerVatcodeFragment.toLowerCase())
+				- c2.getVatCode().toLowerCase().indexOf(customerVatcodeFragment.toLowerCase()))
 		.collect(Collectors.toList());
 }
 }
