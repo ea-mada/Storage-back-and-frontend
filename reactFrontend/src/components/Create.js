@@ -52,7 +52,7 @@ class Create extends Component {
               </div>
               <div className="form-group">
                 <label htmlFor="writingDate">Name*:</label>
-                <input type="text" className="form-control" name="name" value={name} onChange={this.onChange} placeholder="Name" pattern="[A-Z]{1}[a-z]+" required />
+                <input type="text" className="form-control" name="name" value={name} onChange={this.onChange} placeholder="Name" required />
               </div>
               <div className="form-group">
                 <label htmlFor="address">Address*:</label>

@@ -1,6 +1,6 @@
 #FileLock
-#Thu Apr 04 22:28:04 EEST 2019
-server=192.168.56.1\:56636
-hostName=DESKTOP-ONIGVUD
+#Fri Apr 05 10:46:27 EEST 2019
+hostName=204-03-PC
+id=169ec7687c931c2a2b9bdd829369e068087c1ae37ab
 method=file
-id=169e9d274540529666d0eaea3e1c839ccef2f467934
+server=192.168.56.1\:51409

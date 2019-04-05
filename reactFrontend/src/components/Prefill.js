@@ -143,6 +143,7 @@ class Prefill extends Component {
     const { customerNamesAndIds, customerVatcodesAndIds, vatCode, name, address, phoneNumber, iban, notes } = this.state;
     return (
       <div className="container">
+      <h4><Link to="/"><span className="glyphicon glyphicon-th-list" aria-hidden="true"></span> Customer List</Link></h4>
       <form onSubmit={this.onSubmit} autoComplete="off">
       <div>
       <label htmlFor="vatCode">VatCode:</label>
