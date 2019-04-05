@@ -1,6 +1,6 @@
 #FileLock
-#Fri Apr 05 12:35:25 EEST 2019
+#Fri Apr 05 13:03:14 EEST 2019
 hostName=204-03-PC
-id=169ecda4e67086737919100c9fe0c943be41321c7d9
+id=169ecf3c50ef1c07edfdd53f3a8ebf968151cec1a2e
 method=file
-server=192.168.56.1\:53574
+server=192.168.56.1\:55147

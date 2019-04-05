@@ -25,14 +25,19 @@ class Prefill extends Component {
     this.setState({customerNamesAndIds: []});
 
     document.getElementById('customerNameFragmentId').style.borderColor = "black";
+    document.getElementById('tooMuchCustomersWithName').innerHTML = "";
 
     if (temporary.trim() != '') {
       axios.get('http://localhost:8080/api/storage/customers/prefillName/'+  temporary+ "/" )
       .then(res => {
         this.setState({ customerNamesAndIds: res.data });
 
-        if (res.data.length == 0 || res.data.length > 20) {
+        if (res.data.length == 0) {
           document.getElementById('customerNameFragmentId').style.borderColor = "red";
+          document.getElementById('tooMuchCustomersWithName').innerHTML = "There are 0 Customers containing: '" + temporary + "' in their names.";
+        } else if (res.data.length > 20) {
+          document.getElementById('customerNameFragmentId').style.borderColor = "red";
+          document.getElementById('tooMuchCustomersWithName').innerHTML = "There are more than 20 Customers containing: '" + temporary + "' in their names, BUT SHOWN ONLY 20 IN SUGGESTIONS.";
         }
 
       });
@@ -163,7 +168,6 @@ class Prefill extends Component {
                 <label htmlFor="name">Name:</label>
                 <input id="customerNameFragmentId" type="text" className="form-control" name="name" value={name} onChange={this.onChangeNameField} placeholder="customer name" />
               </div>
-              
               <table>
       <tbody>
       {customerNamesAndIds.slice(0, 20).map(c =>
@@ -173,7 +177,7 @@ class Prefill extends Component {
                 )}
       </tbody>
       </table>
-
+      <pre id="tooMuchCustomersWithName" class="prefillWarning"></pre>
       <div className="form-group">
                 <label htmlFor="address">Address:</label>
                 <input type="text" className="form-control" name="address" value={address} onChange={this.onChangeNonAutoField} placeholder="address" />
