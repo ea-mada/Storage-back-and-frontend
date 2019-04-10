@@ -144,10 +144,16 @@ class Prefill extends Component {
     axios.put('http://localhost:8080/api/storage/customers/setCustomer/'+ customerid, { name, vatCode, address, phoneNumber, iban, notes });
   }
 
+  onClickContainer = () => {
+    this.setState({customerNamesAndIds: [], customerVatcodesAndIds: []});
+    document.getElementById('customerVatcodeFragmentId').style.borderColor = "black";
+      document.getElementById('customerNameFragmentId').style.borderColor = "black";
+  }
+
   render() {
     const { customerNamesAndIds, customerVatcodesAndIds, vatCode, name, address, phoneNumber, iban, notes } = this.state;
     return (
-      <div className="container">
+      <div className="container" onClick={this.onClickContainer}>
       <h4><Link to="/customers"><span className="glyphicon glyphicon-th-list" aria-hidden="true"></span> Customer List</Link></h4>
       <form onSubmit={this.onSubmit} autoComplete="off">
       <div>
@@ -177,7 +183,7 @@ class Prefill extends Component {
                 )}
       </tbody>
       </table>
-      <pre id="tooMuchCustomersWithName" class="prefillWarning"></pre>
+      <pre id="tooMuchCustomersWithName" className="prefillWarning"></pre>
       <div className="form-group">
                 <label htmlFor="address">Address:</label>
                 <input type="text" className="form-control" name="address" value={address} onChange={this.onChangeNonAutoField} placeholder="address" />
