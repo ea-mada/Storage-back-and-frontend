@@ -157,7 +157,7 @@ class Prefill extends Component {
     console.log(vatCode)
     axios.put('http://localhost:8080/api/storage/customers/setCustomer/'+ customerid, { name, vatCode, address, phoneNumber, iban, notes });
     } else {
-      axios.post("http://localhost:8080/api/storage/customers/addCustomer/"+ customerid, { name, vatCode, address, phoneNumber, iban, notes });
+      axios.post("http://localhost:8080/api/storage/customers/addCustomer/", { name, vatCode, address, phoneNumber, iban, notes });
     }
     
   }
