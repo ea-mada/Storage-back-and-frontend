@@ -32,11 +32,13 @@ class Prefill extends Component {
       .then(res => {
         this.setState({ customerNamesAndIds: res.data });
 
-        if (res.data.length === 0) {
+        if (res.data.length === 0 || res.data.length > 20) {
           document.getElementById('customerNameFragmentId').style.borderColor = "red";
+        }
+
+        if (res.data.length === 0) {
           document.getElementById('tooMuchCustomersWithName').innerHTML = "There are 0 Customers containing: '" + temporary + "' in their names.";
         } else if (res.data.length > 20) {
-          document.getElementById('customerNameFragmentId').style.borderColor = "red";
           document.getElementById('tooMuchCustomersWithName').innerHTML = "There are more than 20 Customers containing: '" + temporary + "' in their names, BUT SHOWN ONLY 20 IN SUGGESTIONS.";
         }
 
@@ -52,6 +54,7 @@ class Prefill extends Component {
     this.setState({customerVatcodesAndIds: []});
 
     document.getElementById('customerVatcodeFragmentId').style.borderColor = "black";
+    document.getElementById('tooMuchCustomersWithVatcode').innerHTML = "";
 
     if (temporary.trim() !== '') {
       axios.get('http://localhost:8080/api/storage/customers/prefillVatcode/'+  temporary+ "/" )
@@ -60,6 +63,12 @@ class Prefill extends Component {
 
         if (res.data.length === 0 || res.data.length > 20) {
           document.getElementById('customerVatcodeFragmentId').style.borderColor = "red";
+        }
+
+        if (res.data.length === 0) {
+          document.getElementById('tooMuchCustomersWithVatcode').innerHTML = "There are 0 Customers containing: '" + temporary + "' in their names.";
+        } else if (res.data.length > 20) {
+          document.getElementById('tooMuchCustomersWithVatcode').innerHTML = "There are more than 20 Customers containing: '" + temporary + "' in their names, BUT SHOWN ONLY 20 IN SUGGESTIONS.";
         }
 
       });
@@ -168,7 +177,7 @@ class Prefill extends Component {
             )}
         </tbody>
       </table>
-
+      <pre id="tooMuchCustomersWithVatcode" className="prefillWarning"></pre>
       <div className="form-group">
                 <label htmlFor="name">Name:</label>
                 <input id="customerNameFragmentId" type="text" className="form-control" name="name" value={name} onChange={this.onChangeNameField} placeholder="customer name" />
