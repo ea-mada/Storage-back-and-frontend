@@ -57,7 +57,7 @@ public class StorageController {
 	}
 	
 	@RequestMapping(path = "/customers/setCustomer/{customerid}", method = RequestMethod.PUT)
-	public Customer modifyCustomer(@PathVariable final Long customerid,
+	public ResponseEntity<Customer> modifyCustomer(@PathVariable final Long customerid,
 			@RequestBody @Valid CreateCustomerCommand createCustomerCommand) {
 		return this.service.modifyCustomer(customerid, createCustomerCommand);
 	}

@@ -70,6 +70,10 @@ public class CustomerService {
 	}
 	
 	public ResponseEntity<Customer> addCustomer(CreateCustomerCommand createCustomerCommand) {
+		if (!isUniqueVatCode(createCustomerCommand.getVatCode())) {
+			return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+		}
+		
 		Customer customer = new Customer(createCustomerCommand.getVatCode(), 
 				createCustomerCommand.getName(), createCustomerCommand.getAddress(),
 					createCustomerCommand.getPhoneNumber(), createCustomerCommand
@@ -130,10 +134,24 @@ public class CustomerService {
 		return item;
 	}
 	
-	public Customer modifyCustomer(Long customerid, CreateCustomerCommand
+	private boolean isUniqueVatCode(String newVatcode) {
+		return !this.customerVatcodesAndIds.stream()
+				.anyMatch(c -> c.getVatCode().equals(newVatcode));
+	}
+	
+	private boolean isVatcodeUniqueOrUnchanged(String vatCode, Long customerid) {
+		return !this.customerVatcodesAndIds.stream()
+				.anyMatch(c -> c.getVatCode().equals(vatCode) && c.getId() != customerid);
+	}
+	
+	public ResponseEntity<Customer> modifyCustomer(Long customerid, CreateCustomerCommand
 				createCustomerCommand) {
+		if (!isVatcodeUniqueOrUnchanged(createCustomerCommand.getVatCode(), customerid)) {
+			return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+		}
+		
 		if (customerid == null || customerRepository.findById(customerid) == null) {
-			return null;
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 		Customer customer = this.customerRepository.getOne(customerid);
 		
@@ -152,7 +170,7 @@ public class CustomerService {
 		this.customerVatcodesAndIds.add
 			(new CustomerVatcodeAndIdKepper(customer.getVatCode(), customer.getCustomerid()));
 		
-		return customer;
+		return new ResponseEntity<>(customer, HttpStatus.OK);
 	}
 	
 	public Collection<Item> getItems(Long id) {
