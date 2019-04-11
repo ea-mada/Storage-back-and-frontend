@@ -22,12 +22,13 @@ body {
     display: none;
 }
 
-.prefillWarning {
-    margin-left: 250px;
+.prefillWarningNotTable {
+    margin-left: 70%;
+    font-size: 2em;
 }
 
 #container {
-    padding: 0.5% 10%;
+    padding: 0% 10%;
     margin: 0px;
 }
 

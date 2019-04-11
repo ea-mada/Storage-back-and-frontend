@@ -157,6 +157,8 @@ class Prefill extends Component {
     this.setState({customerNamesAndIds: [], customerVatcodesAndIds: []});
     document.getElementById('customerVatcodeFragmentId').style.borderColor = "black";
       document.getElementById('customerNameFragmentId').style.borderColor = "black";
+      document.getElementById('tooMuchCustomersWithVatcode').innerHTML = "";
+      document.getElementById('tooMuchCustomersWithName').innerHTML = "";
   }
 
   render() {
@@ -167,8 +169,7 @@ class Prefill extends Component {
       <div>
       <label htmlFor="vatCode">VatCode:</label>
                 <input id="customerVatcodeFragmentId" onChange={this.onChangeVatcodeField} type="text" className="form-control" name="vatCode" value={vatCode} placeholder="vatCode" />
-      </div>
-      <table>
+                <table>
         <tbody>
           {customerVatcodesAndIds.slice(0, 20).map(c =>
           customerVatcodesAndIds.length > 20 ?
@@ -182,12 +183,13 @@ class Prefill extends Component {
             )}
         </tbody>
       </table>
-      <pre id="tooMuchCustomersWithVatcode" className="warning"></pre>
+      </div>
+      
+      <pre id="tooMuchCustomersWithVatcode" className="warning prefillWarningNotTable"></pre>
       <div className="form-group">
                 <label htmlFor="name">Name:</label>
                 <input id="customerNameFragmentId" type="text" className="form-control" name="name" value={name} onChange={this.onChangeNameField} placeholder="customer name" />
-              </div>
-              <table>
+                <table>
       <tbody>
       {customerNamesAndIds.slice(0, 20).map(c =>
       customerNamesAndIds.length > 20 ?
@@ -201,7 +203,9 @@ class Prefill extends Component {
                 )}
       </tbody>
       </table>
-      <pre id="tooMuchCustomersWithName" className="warning"></pre>
+              </div>
+              
+      <pre id="tooMuchCustomersWithName" className="warning prefillWarningNotTable"></pre>
       <div className="form-group">
                 <label htmlFor="address">Address:</label>
                 <input type="text" className="form-control" name="address" value={address} onChange={this.onChangeNonAutoField} placeholder="address" />
