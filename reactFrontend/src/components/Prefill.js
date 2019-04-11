@@ -22,7 +22,6 @@ class Prefill extends Component {
     const state = this.state
     state[e.target.name] = e.target.value;
     this.setState(state);
-    this.setState({customerNamesAndIds: []});
 
     
 
@@ -45,6 +44,8 @@ class Prefill extends Component {
         }
 
       });
+    } else {
+      this.setState({customerNamesAndIds: []});
     }
   }
 
@@ -53,7 +54,6 @@ class Prefill extends Component {
     const state = this.state
     state[e.target.name] = e.target.value;
     this.setState(state);
-    this.setState({customerVatcodesAndIds: []});
 
     if (temporary.trim() !== '') {
       axios.get('http://localhost:8080/api/storage/customers/prefillVatcode/'+  temporary+ "/" )
@@ -74,6 +74,8 @@ class Prefill extends Component {
         }
 
       });
+    } else {
+      this.setState({customerVatcodesAndIds: []});
     }
   }
 
