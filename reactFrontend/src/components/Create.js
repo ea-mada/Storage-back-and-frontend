@@ -44,7 +44,6 @@ class Create extends Component {
             </h3>
           </div>
           <div className="panel-body">
-            <h4><Link to="/customers"><span className="glyphicon glyphicon-th-list" aria-hidden="true"></span> Customer List</Link></h4>
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <label htmlFor="vatCode">VAT code:</label>

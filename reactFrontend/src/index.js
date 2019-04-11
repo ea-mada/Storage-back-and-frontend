@@ -6,10 +6,12 @@ import App from './App';
 import './App.css';
 import Create from './components/Create';
 import Prefill from './components/Prefill';
+import Navigation from './components/Navigation';
 
 ReactDOM.render(
   <Router>
       <div>
+        <Route path = "/" component={Navigation} />
         <Route exact path='/customers' component={App} />
         <Route path='/customers/addCustomer' component={Create} />
         <Route path='/customers/prefillCustomer' component={Prefill} />

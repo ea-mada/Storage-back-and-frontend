@@ -27,12 +27,12 @@ class Prefill extends Component {
     document.getElementById('customerNameFragmentId').style.borderColor = "black";
     document.getElementById('tooMuchCustomersWithName').innerHTML = "";
 
-    if (temporary.trim() != '') {
+    if (temporary.trim() !== '') {
       axios.get('http://localhost:8080/api/storage/customers/prefillName/'+  temporary+ "/" )
       .then(res => {
         this.setState({ customerNamesAndIds: res.data });
 
-        if (res.data.length == 0) {
+        if (res.data.length === 0) {
           document.getElementById('customerNameFragmentId').style.borderColor = "red";
           document.getElementById('tooMuchCustomersWithName').innerHTML = "There are 0 Customers containing: '" + temporary + "' in their names.";
         } else if (res.data.length > 20) {
@@ -53,12 +53,12 @@ class Prefill extends Component {
 
     document.getElementById('customerVatcodeFragmentId').style.borderColor = "black";
 
-    if (temporary.trim() != '') {
+    if (temporary.trim() !== '') {
       axios.get('http://localhost:8080/api/storage/customers/prefillVatcode/'+  temporary+ "/" )
       .then(res => {
         this.setState({ customerVatcodesAndIds: res.data });
 
-        if (res.data.length == 0 || res.data.length > 20) {
+        if (res.data.length === 0 || res.data.length > 20) {
           document.getElementById('customerVatcodeFragmentId').style.borderColor = "red";
         }
 
@@ -110,13 +110,13 @@ class Prefill extends Component {
     axios.get('http://localhost:8080/api/storage/customers/getCustomer/'+ customerid)
     .then(res => {
       this.setState({ name: res.data.name, address: res.data.address, phoneNumber: res.data.phoneNumber, iban: res.data.iban });
-      if (res.data.vatCode != null) {
+      if (res.data.vatCode !== null) {
         this.setState({vatCode: res.data.vatCode});
       } else {
         this.setState({vatCode: ''})
       }
 
-      if (res.data.notes != null) {
+      if (res.data.notes !== null) {
         this.setState({notes: res.data.notes});
       } else {
         this.setState({notes: ''});
@@ -154,7 +154,6 @@ class Prefill extends Component {
     const { customerNamesAndIds, customerVatcodesAndIds, vatCode, name, address, phoneNumber, iban, notes } = this.state;
     return (
       <div className="container" onClick={this.onClickContainer}>
-      <h4><Link to="/customers"><span className="glyphicon glyphicon-th-list" aria-hidden="true"></span> Customer List</Link></h4>
       <form onSubmit={this.onSubmit} autoComplete="off">
       <div>
       <label htmlFor="vatCode">VatCode:</label>
