@@ -153,7 +153,7 @@ class Prefill extends Component {
   render() {
     const { customerNamesAndIds, customerVatcodesAndIds, vatCode, name, address, phoneNumber, iban, notes } = this.state;
     return (
-      <div className="container" onClick={this.onClickContainer}>
+      <div className="container" onClick={this.onClickContainer} id="container">
       <form onSubmit={this.onSubmit} autoComplete="off">
       <div>
       <label htmlFor="vatCode">VatCode:</label>

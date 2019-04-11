@@ -25,3 +25,8 @@ body {
 .prefillWarning {
     margin-left: 250px;
 }
+
+#container {
+    padding: 0.5% 10%;
+    margin: 0px;
+}
