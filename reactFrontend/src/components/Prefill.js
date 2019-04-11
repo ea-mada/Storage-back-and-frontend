@@ -171,6 +171,11 @@ class Prefill extends Component {
       <table>
         <tbody>
           {customerVatcodesAndIds.slice(0, 20).map(c =>
+          customerVatcodesAndIds.length > 20 ?
+            <tr>
+              <td id={c.id} onClick={this.fillTextfieldsOnClickVatcode}><span className="warning">There are more records. </span>{c.vatCode}</td>
+            </tr>
+            :
             <tr>
               <td id={c.id} onClick={this.fillTextfieldsOnClickVatcode}>{c.vatCode}</td>
             </tr>
