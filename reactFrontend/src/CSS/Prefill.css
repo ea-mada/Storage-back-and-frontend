@@ -30,3 +30,8 @@ body {
     padding: 0.5% 10%;
     margin: 0px;
 }
+
+.warning {
+    font-family: monospace;
+    color: red;
+}

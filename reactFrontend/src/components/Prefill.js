@@ -177,7 +177,7 @@ class Prefill extends Component {
             )}
         </tbody>
       </table>
-      <pre id="tooMuchCustomersWithVatcode" className="prefillWarning"></pre>
+      <pre id="tooMuchCustomersWithVatcode" className="warning"></pre>
       <div className="form-group">
                 <label htmlFor="name">Name:</label>
                 <input id="customerNameFragmentId" type="text" className="form-control" name="name" value={name} onChange={this.onChangeNameField} placeholder="customer name" />
@@ -185,13 +185,18 @@ class Prefill extends Component {
               <table>
       <tbody>
       {customerNamesAndIds.slice(0, 20).map(c =>
+      customerNamesAndIds.length > 20 ?
+                      <tr>
+                      <td id={c.id} onClick={this.fillTextfieldsOnClickName}><span className="warning">There are more records. </span>{c.name}</td>
+                      </tr>
+                      :
                       <tr>
                       <td id={c.id} onClick={this.fillTextfieldsOnClickName}>{c.name}</td>
-                      </tr>
+                      </tr> 
                 )}
       </tbody>
       </table>
-      <pre id="tooMuchCustomersWithName" className="prefillWarning"></pre>
+      <pre id="tooMuchCustomersWithName" className="warning"></pre>
       <div className="form-group">
                 <label htmlFor="address">Address:</label>
                 <input type="text" className="form-control" name="address" value={address} onChange={this.onChangeNonAutoField} placeholder="address" />
