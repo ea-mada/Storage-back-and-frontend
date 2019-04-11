@@ -24,8 +24,7 @@ class Prefill extends Component {
     this.setState(state);
     this.setState({customerNamesAndIds: []});
 
-    document.getElementById('customerNameFragmentId').style.borderColor = "black";
-    document.getElementById('tooMuchCustomersWithName').innerHTML = "";
+    
 
     if (temporary.trim() !== '') {
       axios.get('http://localhost:8080/api/storage/customers/prefillName/'+  temporary+ "/" )
@@ -40,6 +39,9 @@ class Prefill extends Component {
           document.getElementById('tooMuchCustomersWithName').innerHTML = "There are 0 Customers containing: '" + temporary + "' in their names.";
         } else if (res.data.length > 20) {
           document.getElementById('tooMuchCustomersWithName').innerHTML = "There are more than 20 Customers containing: '" + temporary + "' in their names, BUT SHOWN ONLY 20 IN SUGGESTIONS.";
+        } else {
+          document.getElementById('customerNameFragmentId').style.borderColor = "black";
+          document.getElementById('tooMuchCustomersWithName').innerHTML = "";
         }
 
       });
@@ -52,9 +54,6 @@ class Prefill extends Component {
     state[e.target.name] = e.target.value;
     this.setState(state);
     this.setState({customerVatcodesAndIds: []});
-
-    document.getElementById('customerVatcodeFragmentId').style.borderColor = "black";
-    document.getElementById('tooMuchCustomersWithVatcode').innerHTML = "";
 
     if (temporary.trim() !== '') {
       axios.get('http://localhost:8080/api/storage/customers/prefillVatcode/'+  temporary+ "/" )
@@ -69,6 +68,9 @@ class Prefill extends Component {
           document.getElementById('tooMuchCustomersWithVatcode').innerHTML = "There are 0 Customers containing: '" + temporary + "' in their names.";
         } else if (res.data.length > 20) {
           document.getElementById('tooMuchCustomersWithVatcode').innerHTML = "There are more than 20 Customers containing: '" + temporary + "' in their names, BUT SHOWN ONLY 20 IN SUGGESTIONS.";
+        } else {
+          document.getElementById('customerVatcodeFragmentId').style.borderColor = "black";
+    document.getElementById('tooMuchCustomersWithVatcode').innerHTML = "";
         }
 
       });
@@ -104,7 +106,7 @@ class Prefill extends Component {
       this.setState({customerGotFromPrefillingVatcode: res.data.vatCode, customerGotFromPrefillingName: res.data.name, customerGotFromPrefillingAddress: res.data.address, customerGotFromPrefillingPhonenumber: res.data.phoneNumber, customerGotFromPrefillingIban: res.data.iban, customerGotFromPrefillingNotes: res.data.notes});
       console.log(res.data)
 
-      document.getElementById('edit').style.display = 'block';
+      document.getElementById('button').innerHTML = "Edit Customer";
     });
   }
 
@@ -137,7 +139,7 @@ class Prefill extends Component {
       this.setState({customerGotFromPrefillingVatcode: res.data.vatCode, customerGotFromPrefillingName: res.data.name, customerGotFromPrefillingAddress: res.data.address, customerGotFromPrefillingPhonenumber: res.data.phoneNumber, customerGotFromPrefillingIban: res.data.iban, customerGotFromPrefillingNotes: res.data.notes});
       console.log(res.data)
 
-      document.getElementById('edit').style.display = 'block';
+      document.getElementById('button').innerHTML = "Edit Customer";
     });
   }
 
@@ -149,8 +151,13 @@ class Prefill extends Component {
 
   onSubmit = (e) => {
     const { customerid, vatCode, name, address, phoneNumber, iban, notes } = this.state;
+    if (document.getElementById("button").innerHTML === "Edit Customer") {
     console.log(vatCode)
     axios.put('http://localhost:8080/api/storage/customers/setCustomer/'+ customerid, { name, vatCode, address, phoneNumber, iban, notes });
+    } else {
+      axios.post("http://localhost:8080/api/storage/customers/addCustomer/"+ customerid, { name, vatCode, address, phoneNumber, iban, notes });
+    }
+    
   }
 
   onClickContainer = () => {
@@ -222,7 +229,7 @@ class Prefill extends Component {
                 <label htmlFor="notes">notes:</label>
                 <input type="text" className="form-control" name="notes" value={notes} onChange={this.onChangeNonAutoField} placeholder="notes" />
               </div>
-              <button name="onlyButtonInForm" id="edit" type="submit">Edit Customer</button>
+              <button name="onlyButtonInForm" id="button" type="submit">Add Customer</button>
       </form>
       
       </div>
