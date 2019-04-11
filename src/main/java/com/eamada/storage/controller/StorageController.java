@@ -91,4 +91,9 @@ public class StorageController {
 			final String customerVatcodeFragment) {
 		return this.service.getCustomersMatchingVatcode(customerVatcodeFragment);
 	}
+	
+	@RequestMapping(path = "/deleteAllData", method = RequestMethod.DELETE)
+	public void deleteAllData() {
+		this.service.deleteAllData();
+	}
 }

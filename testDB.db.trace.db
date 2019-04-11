@@ -1,0 +1,6 @@
+2019-04-11 17:00:27 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMERS" not found; SQL statement:
+delete from customers [42102-197]
+2019-04-11 17:00:45 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "DELETE *[*] FROM CUSTOMER "; expected "identifier"; SQL statement:
+delete * from customer [42001-197]

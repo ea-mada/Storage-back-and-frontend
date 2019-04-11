@@ -183,4 +183,10 @@ public class CustomerService {
 				- c2.getVatCode().toLowerCase().indexOf(customerVatcodeFragment.toLowerCase()))
 		.collect(Collectors.toList());
 }
+	
+	public void deleteAllData() {
+		this.customerRepository.deleteAll();
+		this.customerNamesAndIds.clear();
+		this.customerVatcodesAndIds.clear();
+	}
 }
