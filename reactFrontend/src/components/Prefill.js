@@ -166,8 +166,6 @@ class Prefill extends Component {
     this.setState({customerNamesAndIds: [], customerVatcodesAndIds: []});
     document.getElementById('customerVatcodeFragmentId').style.borderColor = "black";
       document.getElementById('customerNameFragmentId').style.borderColor = "black";
-      document.getElementById('tooMuchCustomersWithVatcode').innerHTML = "";
-      document.getElementById('tooMuchCustomersWithName').innerHTML = "";
   }
 
   render() {
