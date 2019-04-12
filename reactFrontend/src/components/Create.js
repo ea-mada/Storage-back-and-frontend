@@ -12,20 +12,13 @@ class Create extends Component {
       address: '',
       phoneNumber: '',
       iban: '',
-      notes: '',
-      error401: ''
+      notes: ''
     };
   }
   onChange = (e) => {
     const state = this.state
     state[e.target.name] = e.target.value;
     this.setState(state);
-  }
-
-  onAlertClose = () =>{
-    this.setState({
-      error401: ''
-    })
   }
 
   onSubmit = (e) => {
@@ -44,23 +37,7 @@ class Create extends Component {
   render() {
     const { vatCode, name, address, phoneNumber, iban, notes } = this.state;
     
-    // intercepts responses before they get to promise
-    axios.interceptors.response.use( response => response,
-      error => {
-          console.log("Error intercepted")
-          switch (error.response.status) {
-              case 401:
-                  this.setState({
-                      error401: 'Provided VAT code is already in database'
-                  })
-                  break;
-          
-              default:
-                  break;
-          }
-          return Promise.reject(error)
-      }
-  )
+  
     return (
       <div className="container">
         <div className="panel panel-default">
@@ -85,7 +62,7 @@ class Create extends Component {
               </div>
               <div className="form-group">
                 <label htmlFor="phoneNumber">Phone number*:</label>
-                <input type="text" className="form-control" name="phoneNumber" value={phoneNumber} onChange={this.onChange} placeholder="Phone Number" pattern="\+370-\d{3}-\d{5}" />
+                <input type="text" className="form-control" name="phoneNumber" value={phoneNumber} onChange={this.onChange} placeholder="Phone Number" pattern="\+370-\d{3}-\d{5}" required />
               </div>
               <div className="form-group">
                 <label htmlFor="iban">IBAN*:</label>
@@ -95,8 +72,6 @@ class Create extends Component {
                 <label htmlFor="phoneNumber">notes:</label>
                 <input type="text" className="form-control" name="notes" value={notes} onChange={this.onChange} placeholder="text" />
               </div>
-              {/* checks if error exist and then renders Alert */}
-              {this.state.error401 && <Alert alertText={this.state.error401} onClose={this.onAlertClose} />}
               <button type="submit" className="btn btn-default">Submit</button>
             </form>
           </div>
