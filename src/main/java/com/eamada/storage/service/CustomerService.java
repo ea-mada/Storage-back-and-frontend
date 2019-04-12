@@ -141,7 +141,7 @@ public class CustomerService {
 	
 	private boolean isVatcodeUniqueOrUnchanged(String vatCode, Long customerid) {
 		return !this.customerVatcodesAndIds.stream()
-				.anyMatch(c -> c.getVatCode().equals(vatCode) && c.getId() != customerid);
+				.anyMatch(c -> c.getVatCode().equals(vatCode) && c.getId().longValue() != customerid.longValue());
 	}
 	
 	public ResponseEntity<Customer> modifyCustomer(Long customerid, CreateCustomerCommand
@@ -163,10 +163,12 @@ public class CustomerService {
 		customer.setNotes(createCustomerCommand.getNotes());
 		
 		this.customerRepository.save(customer);
-		this.customerNamesAndIds.removeIf(c -> c.getId() == customer.getCustomerid());
+		this.customerNamesAndIds.removeIf(c -> c.getId().longValue() 
+				== customer.getCustomerid().longValue());
 		this.customerNamesAndIds.add
 				(new CustomerNameAndIdKeeper(customer.getName(), customer.getCustomerid()));
-		this.customerVatcodesAndIds.removeIf(c -> c.getId() == customer.getCustomerid());
+		this.customerVatcodesAndIds.removeIf(c -> c.getId().longValue() 
+				== customer.getCustomerid().longValue());
 		this.customerVatcodesAndIds.add
 			(new CustomerVatcodeAndIdKepper(customer.getVatCode(), customer.getCustomerid()));
 		

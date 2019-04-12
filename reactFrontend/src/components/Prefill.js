@@ -42,6 +42,7 @@ class Prefill extends Component {
 
       });
     } else {
+      document.getElementById('customerNameFragmentId').style.borderColor = "black";
       this.setState({customerNamesAndIds: []});
     }
   }
@@ -73,6 +74,7 @@ class Prefill extends Component {
       });
     } else {
       this.setState({customerVatcodesAndIds: []});
+      document.getElementById('customerVatcodeFragmentId').style.borderColor = "black";
     }
   }
 
