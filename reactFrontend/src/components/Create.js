@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import Alert from './Alert';
 
 class Create extends Component {
 
@@ -13,13 +12,20 @@ class Create extends Component {
       address: '',
       phoneNumber: '',
       iban: '',
-      notes: ''
+      notes: '',
+      error401: ''
     };
   }
   onChange = (e) => {
     const state = this.state
     state[e.target.name] = e.target.value;
     this.setState(state);
+  }
+
+  onAlertClose = () =>{
+    this.setState({
+      error401: ''
+    })
   }
 
   onSubmit = (e) => {
@@ -30,11 +36,31 @@ class Create extends Component {
     axios.post('http://localhost:8080/api/storage/customers/addCustomer', { vatCode, name, address, phoneNumber, iban, notes })
       .then((result) => {
         this.props.history.push("/customers")
+      }).catch(error =>{
+        console.log(error)
       });
   }
 
   render() {
     const { vatCode, name, address, phoneNumber, iban, notes } = this.state;
+    
+    // intercepts responses before they get to promise
+    axios.interceptors.response.use( response => response,
+      error => {
+          console.log("Error intercepted")
+          switch (error.response.status) {
+              case 401:
+                  this.setState({
+                      error401: 'Provided VAT code is already in database'
+                  })
+                  break;
+          
+              default:
+                  break;
+          }
+          return Promise.reject(error)
+      }
+  )
     return (
       <div className="container">
         <div className="panel panel-default">
@@ -69,6 +95,8 @@ class Create extends Component {
                 <label htmlFor="phoneNumber">notes:</label>
                 <input type="text" className="form-control" name="notes" value={notes} onChange={this.onChange} placeholder="text" />
               </div>
+              {/* checks if error exist and then renders Alert */}
+              {this.state.error401 && <Alert alertText={this.state.error401} onClose={this.onAlertClose} />}
               <button type="submit" className="btn btn-default">Submit</button>
             </form>
           </div>

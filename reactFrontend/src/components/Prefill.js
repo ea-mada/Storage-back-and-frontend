@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../CSS/Prefill.css';
-import { Z_BLOCK } from 'zlib';
 
 class Prefill extends Component {
 
