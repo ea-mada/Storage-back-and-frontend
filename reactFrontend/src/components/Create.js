@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Alert from './Alert';
+import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap';
 
 class Create extends Component {
 
@@ -13,7 +14,8 @@ class Create extends Component {
       phoneNumber: '',
       iban: '',
       notes: '',
-      error401: ''
+      error401: '',
+      modalIsOpen: false
     };
   }
   onChange = (e) => {
@@ -28,6 +30,17 @@ class Create extends Component {
     })
   }
 
+  toggleModal = () => {
+    this.setState(prevState => ({
+      modalIsOpen: !prevState.modalIsOpen
+    }));
+  }
+
+  onCloseModal = () => {
+    this.toggleModal();
+    this.props.history.push("/customers");
+  }
+
   onSubmit = (e) => {
     e.preventDefault();
 
@@ -35,9 +48,9 @@ class Create extends Component {
 
     axios.post('http://localhost:8080/api/storage/customers/addCustomer', { vatCode, name, address, phoneNumber, iban, notes })
       .then((result) => {
-        this.props.history.push("/customers")
+        this.toggleModal();
       }).catch(error =>{
-        console.log(error)
+        console.log(error);
       });
   }
 
@@ -54,7 +67,6 @@ class Create extends Component {
                       error401: 'Provided VAT code is already in database'
                   })
                   break;
-          
               default:
                   break;
           }
@@ -63,6 +75,14 @@ class Create extends Component {
   )
     return (
       <div className="container">
+        <Modal isOpen={this.state.modalIsOpen} toggle={this.toggleModal} className={this.props.className}>
+          <ModalBody>
+            <p>Customer was added succesfully!</p>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.onCloseModal}>OK</Button>
+          </ModalFooter>
+        </Modal>
         <div className="panel panel-default">
           <div className="panel-heading">
             <h3 className="panel-title">
@@ -97,6 +117,7 @@ class Create extends Component {
               </div>
               {/* checks if error exist and then renders Alert */}
               {this.state.error401 && <Alert alertText={this.state.error401} onClose={this.onAlertClose} />}
+
               <button type="submit" className="btn btn-default">Submit</button>
             </form>
           </div>
