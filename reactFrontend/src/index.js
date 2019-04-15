@@ -7,6 +7,7 @@ import './App.css';
 import Create from './components/Create';
 import Prefill from './components/Prefill';
 import Navigation from './components/Navigation';
+import './axiosDefaults';
 
 ReactDOM.render(
   <Router>

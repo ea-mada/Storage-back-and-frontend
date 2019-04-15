@@ -23,7 +23,7 @@ class Prefill extends Component {
     
 
     if (temporary.trim() !== '') {
-      axios.get('http://localhost:8080/api/storage/customers/prefillName/'+  temporary+ "/" )
+      axios.get('/customers/prefillName/'+  temporary+ "/" )
       .then(res => {
         this.setState({ customerNamesAndIds: res.data });
 
@@ -53,7 +53,7 @@ class Prefill extends Component {
     this.setState(state);
 
     if (temporary.trim() !== '') {
-      axios.get('http://localhost:8080/api/storage/customers/prefillVatcode/'+  temporary+ "/" )
+      axios.get('/customers/prefillVatcode/'+  temporary+ "/" )
       .then(res => {
         this.setState({ customerVatcodesAndIds: res.data });
 
@@ -84,7 +84,7 @@ class Prefill extends Component {
     this.setState({ name: temporary })
     this.setState({ customerNamesAndIds: [] });
 
-    axios.get('http://localhost:8080/api/storage/customers/getCustomer/'+ customerid)
+    axios.get('/customers/getCustomer/'+ customerid)
     .then(res => {
       this.setState({ customerid: res.data.customerid, name: res.data.name, address: res.data.address, phoneNumber: res.data.phoneNumber, iban: res.data.iban });
       if (res.data.vatCode != null) {
@@ -117,7 +117,7 @@ class Prefill extends Component {
     this.setState({ vatCode: temporary })
     this.setState({ customerVatcodesAndIds: [] });
 
-    axios.get('http://localhost:8080/api/storage/customers/getCustomer/'+ customerid)
+    axios.get('/customers/getCustomer/'+ customerid)
     .then(res => {
       this.setState({ name: res.data.name, address: res.data.address, phoneNumber: res.data.phoneNumber, iban: res.data.iban });
       if (res.data.vatCode !== null) {
@@ -152,9 +152,9 @@ class Prefill extends Component {
     const { customerid, vatCode, name, address, phoneNumber, iban, notes } = this.state;
     if (document.getElementById("button").innerHTML === "Edit Customer") {
     console.log(vatCode)
-    axios.put('http://localhost:8080/api/storage/customers/setCustomer/'+ customerid, { name, vatCode, address, phoneNumber, iban, notes });
+    axios.put('/customers/setCustomer/'+ customerid, { name, vatCode, address, phoneNumber, iban, notes });
     } else {
-      axios.post("http://localhost:8080/api/storage/customers/addCustomer/", { name, vatCode, address, phoneNumber, iban, notes });
+      axios.post("/customers/addCustomer/", { name, vatCode, address, phoneNumber, iban, notes });
     }
     
   }

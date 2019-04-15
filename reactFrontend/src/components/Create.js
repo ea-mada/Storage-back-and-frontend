@@ -46,7 +46,7 @@ class Create extends Component {
 
     const { vatCode, name, address, phoneNumber, iban, notes } = this.state;
 
-    axios.post('http://localhost:8080/api/storage/customers/addCustomer', { vatCode, name, address, phoneNumber, iban, notes })
+    axios.post('/customers/addCustomer', { vatCode, name, address, phoneNumber, iban, notes })
       .then((result) => {
         this.toggleModal();
       }).catch(error =>{
