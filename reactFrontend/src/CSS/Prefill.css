@@ -1,0 +1,36 @@
+table {
+    border: 1px solid black;
+    background-color: white;
+    position: absolute;
+}
+
+td {
+    font-size: 12px;
+}
+
+tr:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+body {
+    background-color: wheat;
+}
+
+.prefillWarningNotTable {
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+    margin-left: 70%;
+}
+
+#container {
+    padding: 0% 10%;
+    margin: 0px;
+}
+
+.warning {
+    font-family: monospace;
+    color: red;
+}
