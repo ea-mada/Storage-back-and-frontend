@@ -1,12 +1,9 @@
 package com.eamada.storage.service;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-
-import javax.persistence.Transient;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,8 +12,6 @@ import org.springframework.stereotype.Service;
 
 import com.eamada.storage.CreateCustomerCommand;
 import com.eamada.storage.CreateItemCommand;
-import com.eamada.storage.CustomerNameAndIdKeeper;
-import com.eamada.storage.CustomerVatcodeAndIdKepper;
 import com.eamada.storage.model.Customer;
 import com.eamada.storage.model.Item;
 import com.eamada.storage.repository.CustomerRepository;
@@ -28,35 +23,12 @@ public class CustomerService {
 	private CustomerRepository customerRepository;
 	private ItemRepository itemRepository;
 	
-//	@Transient
-//	private Set<CustomerNameAndIdKeeper> customerNamesAndIds = new 
-//		TreeSet<>((c1, c2) -> c1.getName().toLowerCase()
-//		.compareTo(c2.getName().toLowerCase()));
-	
-	@Transient
-	private List<CustomerNameAndIdKeeper> customerNamesAndIds = new 
-		ArrayList<>();
-	
-//	@Transient
-//	private Set<CustomerVatcodeAndIdKepper> customerVatcodesAndIds = new 
-//		TreeSet<>((c1, c2) -> c1.getVatCode().toLowerCase()
-//		.compareTo(c2.getVatCode().toLowerCase()));
-	
-	@Transient
-	private List<CustomerVatcodeAndIdKepper> customerVatcodesAndIds = new 
-		ArrayList<>();
-	
 	@Autowired
 	public CustomerService(CustomerRepository customerRepository,
 			ItemRepository itemRepository) {
 		super();
 		this.customerRepository = customerRepository;
 		this.itemRepository = itemRepository;
-		this.customerRepository.findAll()
-		.forEach(c -> {customerNamesAndIds
-				.add(new CustomerNameAndIdKeeper(c.getName(), c.getCustomerid()));
-					customerVatcodesAndIds.add
-						(new CustomerVatcodeAndIdKepper(c.getVatCode(), c.getCustomerid()));});
 	}
 
 	private Logger log = Logger.getLogger(CustomerService.class.getName());
@@ -80,10 +52,6 @@ public class CustomerService {
 						.getIban(), createCustomerCommand.getNotes());
 		
 		this.customerRepository.save(customer);
-		this.customerNamesAndIds.add(new CustomerNameAndIdKeeper
-				(customer.getName(), customer.getCustomerid()));
-		this.customerVatcodesAndIds.add(new CustomerVatcodeAndIdKepper
-				(customer.getVatCode(), customer.getCustomerid()));
 		
 		return new ResponseEntity<>(customer, HttpStatus.OK);
 	}
@@ -102,8 +70,6 @@ public class CustomerService {
 	public String deleteCustomer(Long customerid) {
 		if (customerRepository.findById(customerid).orElse(null) != null) {
 			this.customerRepository.deleteById(customerid);
-			this.customerNamesAndIds.removeIf(c -> c.getId() == customerid);
-			this.customerVatcodesAndIds.removeIf(c -> c.getId() == customerid);
 			return "Customer with Id " + customerid + " was removed.";
 		}
 		return "! There is no customer with id: '" + customerid
@@ -135,13 +101,14 @@ public class CustomerService {
 	}
 	
 	private boolean isUniqueVatCode(String newVatcode) {
-		return !this.customerVatcodesAndIds.stream()
+		return !this.customerRepository.findAll().stream()
 				.anyMatch(c -> c.getVatCode().equals(newVatcode));
 	}
 	
 	private boolean isVatcodeUniqueOrUnchanged(String vatCode, Long customerid) {
-		return !this.customerVatcodesAndIds.stream()
-				.anyMatch(c -> c.getVatCode().equals(vatCode) && c.getId() != customerid);
+		return !this.customerRepository.findAll().stream()
+				.anyMatch(c -> c.getVatCode().equals(vatCode) && c.getCustomerid().longValue()
+						!= customerid.longValue());
 	}
 	
 	public ResponseEntity<Customer> modifyCustomer(Long customerid, CreateCustomerCommand
@@ -163,12 +130,6 @@ public class CustomerService {
 		customer.setNotes(createCustomerCommand.getNotes());
 		
 		this.customerRepository.save(customer);
-		this.customerNamesAndIds.removeIf(c -> c.getId() == customer.getCustomerid());
-		this.customerNamesAndIds.add
-				(new CustomerNameAndIdKeeper(customer.getName(), customer.getCustomerid()));
-		this.customerVatcodesAndIds.removeIf(c -> c.getId() == customer.getCustomerid());
-		this.customerVatcodesAndIds.add
-			(new CustomerVatcodeAndIdKepper(customer.getVatCode(), customer.getCustomerid()));
 		
 		return new ResponseEntity<>(customer, HttpStatus.OK);
 	}
@@ -177,9 +138,9 @@ public class CustomerService {
 		return this.customerRepository.getOne(id).getItems();
 	}
 	
-	public List<CustomerNameAndIdKeeper> getCustomersWithNamesMatching
+	public List<Customer> getCustomersWithNamesMatching
 			(String customerNameFragment) {
-		return this.customerNamesAndIds.stream()
+		return this.customerRepository.findAll().stream()
 		.limit(500000)
 		.filter(c -> c.getName().toLowerCase()
 		.contains(customerNameFragment.toLowerCase()))
@@ -189,10 +150,10 @@ public class CustomerService {
 		.collect(Collectors.toList());
 	}
 	
-	public List<CustomerVatcodeAndIdKepper> getCustomersMatchingVatcode
+	public List<Customer> getCustomersMatchingVatcode
 	(String customerVatcodeFragment) {
 		
-		return this.customerVatcodesAndIds.stream()
+		return this.customerRepository.findAll().stream()
 		.limit(500000)
 		.filter(c -> c.getVatCode().toLowerCase()
 		.contains(customerVatcodeFragment.toLowerCase()))
@@ -204,7 +165,5 @@ public class CustomerService {
 	
 	public void deleteAllData() {
 		this.customerRepository.deleteAll();
-		this.customerNamesAndIds.clear();
-		this.customerVatcodesAndIds.clear();
 	}
 }

@@ -105,7 +105,7 @@ class Create extends Component {
               </div>
               <div className="form-group">
                 <label htmlFor="phoneNumber">Phone number*:</label>
-                <input type="text" className="form-control" name="phoneNumber" value={phoneNumber} onChange={this.onChange} placeholder="Phone Number" pattern="\+370-\d{3}-\d{5}" />
+                <input type="text" className="form-control" name="phoneNumber" value={phoneNumber} onChange={this.onChange} placeholder="Phone Number" pattern="\+370-\d{3}-\d{5}" required />
               </div>
               <div className="form-group">
                 <label htmlFor="iban">IBAN*:</label>

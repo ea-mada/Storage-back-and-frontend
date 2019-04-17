@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.eamada.storage.CreateCustomerCommand;
 import com.eamada.storage.CreateItemCommand;
-import com.eamada.storage.CustomerNameAndIdKeeper;
-import com.eamada.storage.CustomerVatcodeAndIdKepper;
 import com.eamada.storage.model.Customer;
 import com.eamada.storage.model.Item;
 import com.eamada.storage.service.CustomerService;
@@ -80,14 +78,14 @@ public class StorageController {
 
 	@RequestMapping(path = "/customers/prefillName/{customerNameFragment}",
 			method = RequestMethod.GET)
-	public List<CustomerNameAndIdKeeper> getCustomersThatMatchesString(@PathVariable 
+	public List<Customer> getCustomersThatMatchesString(@PathVariable 
 			final String customerNameFragment) {
 		return this.service.getCustomersWithNamesMatching(customerNameFragment);
 	}
 	
 	@RequestMapping(path = "/customers/prefillVatcode/{customerVatcodeFragment}",
 			method = RequestMethod.GET)
-	public List<CustomerVatcodeAndIdKepper> getCustomersMatchingVatCode(@PathVariable 
+	public List<Customer> getCustomersMatchingVatCode(@PathVariable 
 			final String customerVatcodeFragment) {
 		return this.service.getCustomersMatchingVatcode(customerVatcodeFragment);
 	}

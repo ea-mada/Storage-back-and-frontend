@@ -42,6 +42,7 @@ class Prefill extends Component {
 
       });
     } else {
+      document.getElementById('customerNameFragmentId').style.borderColor = "black";
       this.setState({customerNamesAndIds: []});
     }
   }
@@ -73,6 +74,7 @@ class Prefill extends Component {
       });
     } else {
       this.setState({customerVatcodesAndIds: []});
+      document.getElementById('customerVatcodeFragmentId').style.borderColor = "black";
     }
   }
 
@@ -178,11 +180,11 @@ class Prefill extends Component {
           {customerVatcodesAndIds.slice(0, 20).map(c =>
           customerVatcodesAndIds.length > 20 ?
             <tr>
-              <td id={c.id} onClick={this.fillTextfieldsOnClickVatcode}><span className="warning">There are more records. </span>{c.vatCode}</td>
+              <td id={c.customerid} onClick={this.fillTextfieldsOnClickVatcode}><span className="warning">There are more records. </span>{c.vatCode}</td>
             </tr>
             :
             <tr>
-              <td id={c.id} onClick={this.fillTextfieldsOnClickVatcode}>{c.vatCode}</td>
+              <td id={c.customerid} onClick={this.fillTextfieldsOnClickVatcode}>{c.vatCode}</td>
             </tr>
             )}
         </tbody>
@@ -198,11 +200,11 @@ class Prefill extends Component {
       {customerNamesAndIds.slice(0, 20).map(c =>
       customerNamesAndIds.length > 20 ?
                       <tr>
-                      <td id={c.id} onClick={this.fillTextfieldsOnClickName}><span className="warning">There are more records. </span>{c.name}</td>
+                      <td id={c.customerid} onClick={this.fillTextfieldsOnClickName}><span className="warning">There are more records. </span>{c.name}</td>
                       </tr>
                       :
                       <tr>
-                      <td id={c.id} onClick={this.fillTextfieldsOnClickName}>{c.name}</td>
+                      <td id={c.customerid} onClick={this.fillTextfieldsOnClickName}>{c.name}</td>
                       </tr> 
                 )}
       </tbody>
