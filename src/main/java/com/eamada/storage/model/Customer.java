@@ -28,15 +28,15 @@ public class Customer {
 	private String notes;
 	
 	@OneToMany(mappedBy = "customer", cascade=CascadeType.ALL)
-	private Set<Item> items = new HashSet<>();
+	private Set<Invoice> invoices = new HashSet<>();
 	
-	public Collection<Item> getItems() {
-		return this.items;
+	public Collection<Invoice> getInvoices() {
+		return this.invoices;
 	}
 	
-	public void addItem(Item item) {
-		this.items.add(item);
-		item.setCustomer(this); 
+	public void addInvoice(Invoice invoice) {
+		this.invoices.add(invoice);
+		invoice.setCustomer(this); 
 	}
 	
 	public Customer() { }
@@ -107,8 +107,8 @@ public class Customer {
 		this.notes = notes;
 	}
 
-	public void setItems(Set<Item> items) {
-		this.items = items;
+	public void setInvoices(Set<Invoice> invoices) {
+		this.invoices = invoices;
 	}
 	
 }

@@ -37,10 +37,10 @@ public class StorageController {
 		return this.service.getCustomer(customerid);
 	}
 	
-	@RequestMapping(path = "/{customerid}/items", method = RequestMethod.GET)
-	public Collection<Item> getItems(@PathVariable final Long customerid) {
-		return this.service.getItems(customerid);
-	}
+//	@RequestMapping(path = "/{customerid}/items", method = RequestMethod.GET)
+//	public Collection<Item> getItems(@PathVariable final Long customerid) {
+//		return this.service.getItems(customerid);
+//	}
 	
 	@RequestMapping(path = "/customers/addCustomer", method = RequestMethod.POST)
 	public ResponseEntity<Customer> addCustomer(@RequestBody @Valid CreateCustomerCommand
@@ -48,11 +48,11 @@ public class StorageController {
 		return this.service.addCustomer(createCustomerCommand);
 	}
 	
-	@RequestMapping(value = "{customerid}/item", method = RequestMethod.POST)
-	public Item addItem(@PathVariable @Valid final Long customerid,
-			@RequestBody @Valid CreateItemCommand createItemCommand) {
-		return this.service.addItem(customerid, createItemCommand);
-	}
+//	@RequestMapping(value = "{customerid}/item", method = RequestMethod.POST)
+//	public Item addItem(@PathVariable @Valid final Long customerid,
+//			@RequestBody @Valid CreateItemCommand createItemCommand) {
+//		return this.service.addItem(customerid, createItemCommand);
+//	}
 	
 	@RequestMapping(path = "/customers/setCustomer/{customerid}", method = RequestMethod.PUT)
 	public ResponseEntity<Customer> modifyCustomer(@PathVariable final Long customerid,
@@ -60,21 +60,21 @@ public class StorageController {
 		return this.service.modifyCustomer(customerid, createCustomerCommand);
 	}
 	
-	@RequestMapping(path = "{itemid}/item", method = RequestMethod.PUT)
-	public Item modifyItem(@PathVariable final Long itemid,
-			@RequestBody @Valid CreateItemCommand createItemCommand) {
-		return this.service.modifyItem(itemid, createItemCommand);
-	}
+//	@RequestMapping(path = "{itemid}/item", method = RequestMethod.PUT)
+//	public Item modifyItem(@PathVariable final Long itemid,
+//			@RequestBody @Valid CreateItemCommand createItemCommand) {
+//		return this.service.modifyItem(itemid, createItemCommand);
+//	}
 	
 	@RequestMapping(path = "/customers/deleteCustomer/{customerid}", method = RequestMethod.DELETE)
 	public String deleteCustomer(@PathVariable final Long customerid) {
 		return this.service.deleteCustomer(customerid);
 	}
 	
-	@RequestMapping(path = "/delete/item/{itemid}", method = RequestMethod.DELETE)
-	public String deleteItem(@PathVariable final long itemid) {
-		return this.service.deleteItem(itemid);
-	}
+//	@RequestMapping(path = "/delete/item/{itemid}", method = RequestMethod.DELETE)
+//	public String deleteItem(@PathVariable final long itemid) {
+//		return this.service.deleteItem(itemid);
+//	}
 
 	@RequestMapping(path = "/customers/prefillName/{customerNameFragment}",
 			method = RequestMethod.GET)
