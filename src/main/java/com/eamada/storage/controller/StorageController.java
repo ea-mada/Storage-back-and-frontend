@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.eamada.storage.CreateCustomerCommand;
 import com.eamada.storage.CreateItemCommand;
 import com.eamada.storage.model.Customer;
+import com.eamada.storage.model.Invoice;
 import com.eamada.storage.model.Item;
+import com.eamada.storage.repository.InvoiceRepository;
 import com.eamada.storage.service.CustomerService;
+import com.eamada.storage.service.InvoiceService;
 
 @RestController
 @RequestMapping(value="/api/storage")
@@ -26,6 +29,9 @@ import com.eamada.storage.service.CustomerService;
 public class StorageController {
 	@Autowired
 	private CustomerService service;
+	
+	@Autowired
+	private InvoiceService invoiceService;
 	
 	@RequestMapping(path = "/customers/getCustomers", method = RequestMethod.GET)
 	public Collection<Customer> getCustomers() {
@@ -94,4 +100,15 @@ public class StorageController {
 	public void deleteAllData() {
 		this.service.deleteAllData();
 	}
+	
+	@RequestMapping(path = "invoices/findInvoiceById/{invoiceId}", method = RequestMethod.GET)
+	public Invoice findInvoiceById(@PathVariable Long invoiceId) {
+		return this.invoiceService.getInvoiceById(invoiceId);
+	}
+	
+	@RequestMapping(path = "/invoices/addInvoice/{customerId}", method = RequestMethod.POST)
+	public void addInvoice(@PathVariable Long customerId, @RequestBody Invoice invoice) {
+		this.invoiceService.createInvoice(invoice);
+	}
+	
 }

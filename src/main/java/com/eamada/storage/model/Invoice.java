@@ -23,12 +23,12 @@ public class Invoice {
 
     @Id
     @GeneratedValue
-    private Long id;
-    private long number;
+    private Long invoiceId;
     @CreationTimestamp
-    private LocalDate creationDate;
-    private String prescribedCompany;
-    private String receiver;
+    private LocalDate dateOfPurchase;
+    private String receivingCompany;
+    private String distributor;
+    private Long customerId;
 
 //    @ManyToMany
 //    @JoinTable(
@@ -46,6 +46,7 @@ public class Invoice {
     
     public void setCustomer(Customer customer) {
     	this.customer = customer;
+    	this.customerId = customer.getCustomerid();
     }
     
     public Customer getCustomer() {
@@ -54,10 +55,62 @@ public class Invoice {
 
     public Invoice(){}
 
-    public Invoice(long number, String prescribedCompany, String receiver) {
-        this.number = number;
-        this.prescribedCompany = prescribedCompany;
-        this.receiver = receiver;
+    public Invoice(String receivingCompany, LocalDate dateOfPurchase,
+    String distributor, Customer customer) {
+        this.receivingCompany = receivingCompany;
+        this.dateOfPurchase =  dateOfPurchase;
+        this.distributor = distributor;
+        this.customerId = customer.getCustomerid();
+        this.customer = customer;
     }
 
+	public Long getInvoiceId() {
+		return invoiceId;
+	}
+
+	public void setInvoiceId(Long invoiceId) {
+		this.invoiceId = invoiceId;
+	}
+
+	public String getReceivingCompany() {
+		return receivingCompany;
+	}
+
+	public void setReceivingCompany(String receivingCompany) {
+		this.receivingCompany = receivingCompany;
+	}
+
+	public LocalDate getDateOfPurchase() {
+		return dateOfPurchase;
+	}
+
+	public void setDateOfPurchase(LocalDate dateOfPurchase) {
+		this.dateOfPurchase = dateOfPurchase;
+	}
+
+	public String getDistributor() {
+		return distributor;
+	}
+
+	public void setDistributor(String distributor) {
+		this.distributor = distributor;
+	}
+
+	public Long getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+	}
+
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
+
+    
 }
