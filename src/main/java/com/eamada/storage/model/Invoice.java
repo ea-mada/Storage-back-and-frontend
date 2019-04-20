@@ -28,7 +28,6 @@ public class Invoice {
     private LocalDate dateOfPurchase;
     private String receivingCompany;
     private String distributor;
-    private Long customerId;
 
 //    @ManyToMany
 //    @JoinTable(
@@ -40,13 +39,13 @@ public class Invoice {
     private List<Item> items;
     
     @ManyToOne
+    @JoinColumn(name = "customerId")
     @JsonIgnore
-    @JoinColumn(name = "customer", insertable = false, updatable = false)
     private Customer customer;
     
     public void setCustomer(Customer customer) {
     	this.customer = customer;
-    	this.customerId = customer.getCustomerid();
+//    	this.customerId = customer.getCustomerid();
     }
     
     public Customer getCustomer() {
@@ -56,12 +55,10 @@ public class Invoice {
     public Invoice(){}
 
     public Invoice(String receivingCompany, LocalDate dateOfPurchase,
-    String distributor, Customer customer) {
+    String distributor) {
         this.receivingCompany = receivingCompany;
         this.dateOfPurchase =  dateOfPurchase;
         this.distributor = distributor;
-        this.customerId = customer.getCustomerid();
-        this.customer = customer;
     }
 
 	public Long getInvoiceId() {
@@ -94,14 +91,6 @@ public class Invoice {
 
 	public void setDistributor(String distributor) {
 		this.distributor = distributor;
-	}
-
-	public Long getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(Long customerId) {
-		this.customerId = customerId;
 	}
 
 	public List<Item> getItems() {

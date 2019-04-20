@@ -5,17 +5,49 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.eamada.storage.CreateInvoiceCommand;
 import com.eamada.storage.model.Invoice;
+import com.eamada.storage.repository.CustomerRepository;
 import com.eamada.storage.repository.InvoiceRepository;
 
 @Service
 public class InvoiceService {
-    private InvoiceRepository invoiceRepository;
+	private InvoiceRepository invoiceRepository;
+    private CustomerRepository customerRepository;
     
     @Autowired
-    public void setInvoiceService(InvoiceRepository invoiceRepository) {
+    public InvoiceService(InvoiceRepository invoiceRepository, CustomerRepository customerRepository) {
+    	super();
         this.invoiceRepository = invoiceRepository;
+        this.customerRepository = customerRepository;
     }
+
+    public Invoice addInvoice(Long customerId, CreateInvoiceCommand createInvoiceCommand) {
+    	Invoice invoice = new Invoice(createInvoiceCommand.getReceivingCompany(), createInvoiceCommand.getDateOfPurchase(),
+    			createInvoiceCommand.getDistributor());
+    	invoice.setCustomer(this.customerRepository.getOne(customerId));
+    	this.createInvoice(invoice);
+    	//this.customerRepository.getOne(customerId).addInvoice(invoice);
+		//this.invoiceRepository.getOne(createItemCommand.getInvoiceId()).addItem(item);
+		
+		return invoice;
+	}
+    
+
+public Invoice modifyInvoice(Long invoiceId, CreateInvoiceCommand createInvoiceCommand) {
+	if (invoiceId == null || this.findInvoiceById(invoiceId) == null) { 
+		return null;
+	}
+	
+	Invoice oldInvoice = this.getInvoiceById(invoiceId);
+	
+	oldInvoice.setDateOfPurchase(createInvoiceCommand.getDateOfPurchase());
+	oldInvoice.setDistributor(createInvoiceCommand.getDistributor());
+	oldInvoice.setReceivingCompany(createInvoiceCommand.getReceivingCompany());
+	invoiceRepository.save(oldInvoice);
+	
+	return oldInvoice;
+}
 
     private Invoice findInvoiceById(long id){
         for (Invoice invoice : getInvoicesList()) {

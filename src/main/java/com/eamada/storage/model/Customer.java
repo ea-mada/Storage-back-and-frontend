@@ -55,10 +55,6 @@ public class Customer {
 		return customerid;
 	}
 
-	public void setCustomerid(Long customerid) {
-		this.customerid = customerid;
-	}
-
 	public String getVatCode() {
 		return vatCode;
 	}

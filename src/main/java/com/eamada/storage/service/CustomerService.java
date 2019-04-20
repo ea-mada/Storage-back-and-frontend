@@ -54,17 +54,6 @@ public class CustomerService {
 		return new ResponseEntity<>(customer, HttpStatus.OK);
 	}
 	
-//	public Item addItem(Long id, CreateItemCommand createItemCommand) {
-//		Item item = new Item(createItemCommand.getName(), createItemCommand.getQuantity(),
-//				createItemCommand.getHeightCm(), createItemCommand.getWidthCm(),
-//					createItemCommand.getPriceEuroCents());
-//		item.setCustomer(customerRepository.getOne(id));
-//		this.itemRepository.save(item);
-//		//this.invoiceRepository.getOne(createItemCommand.getInvoiceId()).addItem(item);
-//		
-//		return item;
-//	}
-	
 	public String deleteCustomer(Long customerid) {
 		if (customerRepository.findById(customerid).orElse(null) != null) {
 			this.customerRepository.deleteById(customerid);
@@ -74,29 +63,7 @@ public class CustomerService {
 				+ "'. No customer was deleted.";
 	}
 	
-//	public String deleteItem(Long id) {
-//		if (itemRepository.findById(id).orElse(null) != null) {
-//			itemRepository.deleteById(id);
-//			return "Item with Id " + id + " was removed.";
-//		}
-//		return "! There is no item with id: '" + id + "'. No item was deleted.";
-//	}
-	
-//	public Item modifyItem(Long itemid, CreateItemCommand createItemCommand) {
-//		if (itemid == null || itemRepository.getOne(itemid) == null) {
-//			return null;
-//		}
-//		Item item = this.itemRepository.getOne(itemid);
-//		item.setHeightCm(createItemCommand.getHeightCm());
-//		item.setCustomer(this.itemRepository.getOne(itemid).getCustomer());
-//		item.setName(createItemCommand.getName());
-//		item.setPriceEuroCents(createItemCommand.getPriceEuroCents());
-//		item.setQuantity(createItemCommand.getQuantity());
-//		item.setWidthCm(createItemCommand.getWidthCm());
-//		itemRepository.save(item);
-//		
-//		return item;
-//	}
+
 	
 	private boolean isUniqueVatCode(String newVatcode) {
 		return !this.customerRepository.findAll().stream()
@@ -132,9 +99,7 @@ public class CustomerService {
 		return new ResponseEntity<>(customer, HttpStatus.OK);
 	}
 	
-//	public Collection<Item> getItems(Long id) {
-//		return this.customerRepository.getOne(id).getInvoices();
-//	}
+
 	
 	public List<Customer> getCustomersWithNamesMatching
 			(String customerNameFragment) {

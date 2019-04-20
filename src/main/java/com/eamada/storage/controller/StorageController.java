@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eamada.storage.CreateCustomerCommand;
+import com.eamada.storage.CreateInvoiceCommand;
 import com.eamada.storage.CreateItemCommand;
 import com.eamada.storage.model.Customer;
 import com.eamada.storage.model.Invoice;
@@ -101,14 +102,16 @@ public class StorageController {
 		this.service.deleteAllData();
 	}
 	
-	@RequestMapping(path = "invoices/findInvoiceById/{invoiceId}", method = RequestMethod.GET)
-	public Invoice findInvoiceById(@PathVariable Long invoiceId) {
+	@RequestMapping(path = "invoices/getInvoiceById/{invoiceId}", method = RequestMethod.GET)
+	public Invoice getInvoiceById(@PathVariable Long invoiceId) {
 		return this.invoiceService.getInvoiceById(invoiceId);
 	}
 	
 	@RequestMapping(path = "/invoices/addInvoice/{customerId}", method = RequestMethod.POST)
-	public void addInvoice(@PathVariable Long customerId, @RequestBody Invoice invoice) {
-		this.invoiceService.createInvoice(invoice);
+	public Invoice addInvoice(@PathVariable Long customerId, @RequestBody @Valid
+			CreateInvoiceCommand createInvoiceCommand) {
+		return this.invoiceService.addInvoice(customerId, createInvoiceCommand);
 	}
+	
 	
 }
