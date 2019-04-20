@@ -113,5 +113,9 @@ public class StorageController {
 		return this.invoiceService.addInvoice(customerId, createInvoiceCommand);
 	}
 	
-	
+	@RequestMapping(path = "invoices/setInvoice/{invoiceId}", method = RequestMethod.PUT)
+	public Invoice setInvoice(@PathVariable Long invoiceId, @RequestBody CreateInvoiceCommand
+			createInvoiceCommand) {
+		return this.invoiceService.modifyInvoice(invoiceId, createInvoiceCommand);
+	}
 }

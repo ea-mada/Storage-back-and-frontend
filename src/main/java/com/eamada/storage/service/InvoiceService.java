@@ -41,9 +41,18 @@ public Invoice modifyInvoice(Long invoiceId, CreateInvoiceCommand createInvoiceC
 	
 	Invoice oldInvoice = this.getInvoiceById(invoiceId);
 	
-	oldInvoice.setDateOfPurchase(createInvoiceCommand.getDateOfPurchase());
-	oldInvoice.setDistributor(createInvoiceCommand.getDistributor());
-	oldInvoice.setReceivingCompany(createInvoiceCommand.getReceivingCompany());
+	if (createInvoiceCommand.getDateOfPurchase() != null) {
+		oldInvoice.setDateOfPurchase(createInvoiceCommand.getDateOfPurchase());
+	}
+	
+	if (createInvoiceCommand.getDistributor() != null) {
+		oldInvoice.setDistributor(createInvoiceCommand.getDistributor());
+	}
+	
+	if (createInvoiceCommand.getReceivingCompany() != null) {
+		oldInvoice.setReceivingCompany(createInvoiceCommand.getReceivingCompany());
+	}
+	
 	invoiceRepository.save(oldInvoice);
 	
 	return oldInvoice;
