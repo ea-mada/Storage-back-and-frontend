@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -27,6 +28,7 @@ public class Invoice {
     @CreationTimestamp
     private LocalDate dateOfPurchase;
     private String receivingCompany;
+//    @Column(columnDefinition="constant")
     private String distributor;
 
 //    @ManyToMany
@@ -85,10 +87,6 @@ public class Invoice {
 
 	public String getDistributor() {
 		return distributor;
-	}
-
-	public void setDistributor(String distributor) {
-		this.distributor = distributor;
 	}
 
 	public List<Item> getItems() {
