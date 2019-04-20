@@ -23,7 +23,7 @@ public class InvoiceService {
     }
 
     public Invoice addInvoice(Long customerId, CreateInvoiceCommand createInvoiceCommand) {
-    	Invoice invoice = new Invoice(createInvoiceCommand.getReceivingCompany(), createInvoiceCommand.getDateOfPurchase(),
+    	Invoice invoice = new Invoice(createInvoiceCommand.getReceivingCompany(),
     			createInvoiceCommand.getDistributor());
     	invoice.setCustomer(this.customerRepository.getOne(customerId));
     	this.createInvoice(invoice);

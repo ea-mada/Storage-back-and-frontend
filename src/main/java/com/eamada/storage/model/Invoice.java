@@ -54,10 +54,8 @@ public class Invoice {
 
     public Invoice(){}
 
-    public Invoice(String receivingCompany, LocalDate dateOfPurchase,
-    String distributor) {
+    public Invoice(String receivingCompany, String distributor) {
         this.receivingCompany = receivingCompany;
-        this.dateOfPurchase =  dateOfPurchase;
         this.distributor = distributor;
     }
 

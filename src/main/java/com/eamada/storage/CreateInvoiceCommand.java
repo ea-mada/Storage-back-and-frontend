@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import javax.validation.constraints.NotNull;
 
 public class CreateInvoiceCommand {
-	@NotNull
 	private LocalDate dateOfPurchase;
 	@NotNull
     private String receivingCompany;
