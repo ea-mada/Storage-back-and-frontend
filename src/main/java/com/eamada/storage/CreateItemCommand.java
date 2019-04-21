@@ -2,24 +2,19 @@ package com.eamada.storage;
 
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.Length;
+import com.eamada.storage.model.Category;
+import com.eamada.storage.model.UnitOfMeasurement;
 
 public class CreateItemCommand {
+	
 	@NotNull
-	@Length(min = 1, max = 20)
 	private String name;
-	
 	@NotNull
-	private int quantity;
-	
+    private double price;
 	@NotNull
-	private int heightCm;
-	
+    private UnitOfMeasurement unitOfMeasurement;
 	@NotNull
-	private int widthCm;
-	
-	@NotNull
-	private long priceEuroCents;
+    private Category category;
 	
 	public CreateItemCommand() { }
 
@@ -27,20 +22,33 @@ public class CreateItemCommand {
 		return name;
 	}
 
-	public int getQuantity() {
-		return quantity;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public int getHeightCm() {
-		return heightCm;
+	public double getPrice() {
+		return price;
 	}
 
-	public int getWidthCm() {
-		return widthCm;
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
-	public long getPriceEuroCents() {
-		return priceEuroCents;
+	public UnitOfMeasurement getUnitOfMeasurement() {
+		return unitOfMeasurement;
 	}
+
+	public void setUnitOfMeasurement(UnitOfMeasurement unitOfMeasurement) {
+		this.unitOfMeasurement = unitOfMeasurement;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
 	
 }

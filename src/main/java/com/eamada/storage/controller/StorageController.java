@@ -20,9 +20,9 @@ import com.eamada.storage.CreateItemCommand;
 import com.eamada.storage.model.Customer;
 import com.eamada.storage.model.Invoice;
 import com.eamada.storage.model.Item;
-import com.eamada.storage.repository.InvoiceRepository;
 import com.eamada.storage.service.CustomerService;
 import com.eamada.storage.service.InvoiceService;
+import com.eamada.storage.service.ItemService;
 
 @RestController
 @RequestMapping(value="/api/storage")
@@ -33,6 +33,16 @@ public class StorageController {
 	
 	@Autowired
 	private InvoiceService invoiceService;
+	
+	@Autowired
+	private ItemService itemService;
+	
+	@RequestMapping(path = "/deleteAllData", method = RequestMethod.DELETE)
+	public void deleteAllData() {
+		this.service.deleteAllData();
+	}
+	
+	//From there, path = /customers
 	
 	@RequestMapping(path = "/customers/getCustomers", method = RequestMethod.GET)
 	public Collection<Customer> getCustomers() {
@@ -97,12 +107,9 @@ public class StorageController {
 		return this.service.getCustomersMatchingVatcode(customerVatcodeFragment);
 	}
 	
-	@RequestMapping(path = "/deleteAllData", method = RequestMethod.DELETE)
-	public void deleteAllData() {
-		this.service.deleteAllData();
-	}
+	//From there, path = /invoices
 	
-	@RequestMapping(path = "invoices/getInvoiceById/{invoiceId}", method = RequestMethod.GET)
+	@RequestMapping(path = "/invoices/getInvoiceById/{invoiceId}", method = RequestMethod.GET)
 	public Invoice getInvoiceById(@PathVariable Long invoiceId) {
 		return this.invoiceService.getInvoiceById(invoiceId);
 	}
@@ -117,5 +124,12 @@ public class StorageController {
 	public Invoice setInvoice(@PathVariable Long invoiceId, @RequestBody CreateInvoiceCommand
 			createInvoiceCommand) {
 		return this.invoiceService.modifyInvoice(invoiceId, createInvoiceCommand);
+	}
+	
+	//From there, path = /items
+	
+	@RequestMapping(path = "/items/addItem", method = RequestMethod.POST)
+	public Item addItem(@RequestBody @Valid CreateItemCommand createItemCommand) {
+		return this.itemService.addItem(createItemCommand);
 	}
 }
