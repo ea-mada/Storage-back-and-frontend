@@ -1,9 +1,18 @@
 package com.eamada.storage.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
+
+import lombok.Data;
 
 @Entity
 @Data
@@ -18,16 +27,13 @@ public class Item {
     private UnitOfMeasurement unitOfMeasurement;
     private int quantity;
 
-//    @ManyToMany
-//    @JoinTable(
-//            name = "invoice_item",
-//            joinColumns = @JoinColumn(name = "item_id"),
-//            inverseJoinColumns = @JoinColumn(name = "invoice_id")
-//    )
-    @ManyToOne
-    @JoinColumn(name = "invoice_id")
-    @JsonIgnore
-    private Invoice invoice;
+    @ManyToMany
+    @JoinTable(
+            name = "invoice_item",
+            joinColumns = @JoinColumn(name = "item_id"),
+            inverseJoinColumns = @JoinColumn(name = "invoice_id")
+    )
+    private List<Invoice> invoices;
 
     public Item(){}
 
