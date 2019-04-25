@@ -4,20 +4,17 @@ import Alert from './Alert';
 import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap';
 
 class Create extends Component {
-
-  constructor() {
-    super();
-    this.state = {
-      vatCode: '',
-      name: '',
-      address: '',
-      phoneNumber: '',
-      iban: '',
-      notes: '',
-      error401: '',
-      modalIsOpen: false
-    };
-  }
+  state = {
+    vatCode: '',
+    name: '',
+    address: '',
+    phoneNumber: '',
+    iban: '',
+    notes: '',
+    error401: '',
+    modalIsOpen: false
+  };
+  
   onChange = (e) => {
     const state = this.state
     state[e.target.name] = e.target.value;

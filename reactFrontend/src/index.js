@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import './CSS/bootstrap.min.css';
+import { HashRouter, Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.css';
 import App from './App';
 import './App.css';
 import Create from './components/Create';
@@ -10,13 +10,13 @@ import Navigation from './components/Navigation';
 import './axiosDefaults';
 
 ReactDOM.render(
-  <Router>
+  <HashRouter>
       <div>
         <Route path = "/" component={Navigation} />
         <Route exact path='/customers' component={App} />
         <Route path='/customers/addCustomer' component={Create} />
         <Route path='/customers/prefillCustomer' component={Prefill} />
       </div>
-  </Router>,
+  </HashRouter>,
   document.getElementById('root')
 );

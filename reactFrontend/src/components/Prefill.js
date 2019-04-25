@@ -3,24 +3,18 @@ import axios from 'axios';
 import '../CSS/Prefill.css';
 
 class Prefill extends Component {
+  state = {
+    customerNamesAndIds: [],
+    customerVatcodesAndIds: [],
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      customerNamesAndIds: [],
-      customerVatcodesAndIds: [],
-
-      customer: {}
-    };
-  }
-
+    customer: {}
+  };
+  
   onChangeNameField = (e) => {
     var temporary = e.target.value
     const state = this.state
     state[e.target.name] = e.target.value;
     this.setState(state);
-
-    
 
     if (temporary.trim() !== '') {
       axios.get('/customers/prefillName/'+  temporary+ "/" )

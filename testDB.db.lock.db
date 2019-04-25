@@ -1,0 +1,6 @@
+#FileLock
+#Wed Apr 24 16:13:41 EEST 2019
+server=127.0.1.1\:33353
+hostName=mindaugas-virtual-machine
+method=file
+id=16a4f7af5549fb87d867f53c56c27e845ce7d2bcc6e

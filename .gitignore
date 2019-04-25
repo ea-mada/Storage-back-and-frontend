@@ -59,3 +59,8 @@ reactFrontend/build/
 
 #Linux dolphin file manager
 /.directory
+
+#Parcel bundler files
+reactFrontend/.cache/
+reactFrontend/dist/
+reactFrontend/production/

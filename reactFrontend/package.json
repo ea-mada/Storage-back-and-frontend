@@ -2,30 +2,28 @@
   "name": "ea-mada-storage",
   "version": "0.1.0",
   "private": true,
+  "main": "index.js",
   "dependencies": {
+    "antd": "^3.15.2",
     "axios": "^0.18.0",
+    "moment": "^2.24.0",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8",
     "reactstrap": "^8.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "parcel ./public/index.html",
+    "build": "parcel build ./public/index.html --public-url ./ --out-dir production"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
   "devDependencies": {
-    "bootstrap": "^4.3.1"
+    "bootstrap": "^4.3.1",
+    "babel-core": "^6.26.3",
+    "babel-plugin-import": "^1.11.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "parcel-bundler": "^1.12.3"
   }
 }
