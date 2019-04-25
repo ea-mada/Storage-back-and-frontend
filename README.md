@@ -3,11 +3,11 @@ Storage
 React:
 cd reactFrontend
 npm install
-npm start
+npm run dev
 
 npx create-react-app reactFrontend
 cd reactFrontend
 npm install axios --save
 ? npm install --save react-router ?
-ir gal dar kaşkas
+ir gal dar kaÃ¾kas
 npm start
