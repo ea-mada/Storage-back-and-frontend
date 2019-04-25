@@ -56,3 +56,6 @@ hs_err_pid*
 reactFrontend/node_modules/
 reactFrontend/build/
 #reactFrontend/public/
+
+#Linux dolphin file manager
+/.directory
