@@ -13,10 +13,10 @@ class ItemsList extends React.Component {
   };
 
   componentWillMount = () => {
-    axios.get("http://localhost:8080/api/invoice")
-          .then(promise =>{
+    axios.get("/items/getItems")
+          .then(response =>{
             this.setState({
-              invoices: promise.data
+              items: response.data
             })
             console.log(this.state.items)
           })
@@ -25,14 +25,14 @@ class ItemsList extends React.Component {
           })
   }
 
-  handleInvoiceDelete = (id) =>{
-    axios.delete(`http://localhost:8080/api/invoice/${id}`)
+  handleItemDelete = (id) =>{
+    axios.delete(`/item/${id}`)
           .then(() =>{
             this.componentWillMount();
-            message.info('Invoice was deleted succesfully.');
+            message.info('Item was deleted succesfully.');
           })
           .catch(()=>{
-            message.error("Whoopsie, something went wrong, couldnt delete selected invoice :(", 10);
+            message.error("Whoopsie, something went wrong, couldnt delete selected item :(", 10);
           })
   }
 
@@ -103,21 +103,17 @@ class ItemsList extends React.Component {
         <span>
           <Link to={{
             pathname: '/' + record.id,
-          }}>Edit invoice</Link>
+          }}>Edit item</Link>
           <Divider type='vertical' />
-          <Link to={{
-            pathname:'/item/' + record.id
-            }}>Show items</Link>
           <Divider type="vertical" />
-          <Button type='danger' onClick={()=> this.handleInvoiceDelete(record.id)}>Delete</Button>
+          <Button type='danger' onClick={()=> this.handleItemDelete(record.id)}>Delete</Button>
         </span>
       ),
     }];
     return (
       <div>
-        <Title>Invoices list</Title>
+        <Title>Items list</Title>
         <div className="table-operations">
-          <FormModalActions refreshData = {this.componentWillMount} />
           <Button onClick={this.clearFilters}>Clear filters</Button>
           <Button onClick={this.clearAll}>Clear filters and sorters</Button>
         </div>

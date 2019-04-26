@@ -8,6 +8,7 @@ import Create from './components/Create';
 import Prefill from './components/Prefill';
 import Navigation from './components/Navigation';
 import './axiosDefaults';
+import ItemsList from './components/ItemsList';
 
 ReactDOM.render(
   <HashRouter>
@@ -16,6 +17,7 @@ ReactDOM.render(
         <Route exact path='/customers' component={App} />
         <Route path='/customers/addCustomer' component={Create} />
         <Route path='/customers/prefillCustomer' component={Prefill} />
+        <Route path='/items' component={ItemsList} />
       </div>
   </HashRouter>,
   document.getElementById('root')
