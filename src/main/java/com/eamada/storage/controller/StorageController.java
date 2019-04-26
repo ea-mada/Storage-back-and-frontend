@@ -54,22 +54,11 @@ public class StorageController {
 		return this.service.getCustomer(customerid);
 	}
 	
-//	@RequestMapping(path = "/{customerid}/items", method = RequestMethod.GET)
-//	public Collection<Item> getItems(@PathVariable final Long customerid) {
-//		return this.service.getItems(customerid);
-//	}
-	
 	@RequestMapping(path = "/customers/addCustomer", method = RequestMethod.POST)
 	public ResponseEntity<Customer> addCustomer(@RequestBody @Valid CreateCustomerCommand
 			createCustomerCommand) {
 		return this.service.addCustomer(createCustomerCommand);
 	}
-	
-//	@RequestMapping(value = "{customerid}/item", method = RequestMethod.POST)
-//	public Item addItem(@PathVariable @Valid final Long customerid,
-//			@RequestBody @Valid CreateItemCommand createItemCommand) {
-//		return this.service.addItem(customerid, createItemCommand);
-//	}
 	
 	@RequestMapping(path = "/customers/setCustomer/{customerid}", method = RequestMethod.PUT)
 	public ResponseEntity<Customer> modifyCustomer(@PathVariable final Long customerid,
@@ -77,21 +66,10 @@ public class StorageController {
 		return this.service.modifyCustomer(customerid, createCustomerCommand);
 	}
 	
-//	@RequestMapping(path = "{itemid}/item", method = RequestMethod.PUT)
-//	public Item modifyItem(@PathVariable final Long itemid,
-//			@RequestBody @Valid CreateItemCommand createItemCommand) {
-//		return this.service.modifyItem(itemid, createItemCommand);
-//	}
-	
 	@RequestMapping(path = "/customers/deleteCustomer/{customerid}", method = RequestMethod.DELETE)
 	public String deleteCustomer(@PathVariable final Long customerid) {
 		return this.service.deleteCustomer(customerid);
 	}
-	
-//	@RequestMapping(path = "/delete/item/{itemid}", method = RequestMethod.DELETE)
-//	public String deleteItem(@PathVariable final long itemid) {
-//		return this.service.deleteItem(itemid);
-//	}
 
 	@RequestMapping(path = "/customers/prefillName/{customerNameFragment}",
 			method = RequestMethod.GET)
@@ -128,8 +106,32 @@ public class StorageController {
 	
 	//From there, path = /items
 	
+	@RequestMapping(path = "/items/getItems", method = RequestMethod.GET)
+	public ResponseEntity<Collection<Item>> getItems() {
+		return this.itemService.getItems();
+	}
+	
+	@RequestMapping(path = "/items/getItem/{itemId}", method = RequestMethod.GET)
+	public ResponseEntity<Item> getItem(@PathVariable Long itemId) {
+		return this.itemService.getItem(itemId);
+	}
+	
 	@RequestMapping(path = "/items/addItem", method = RequestMethod.POST)
-	public Item addItem(@RequestBody @Valid CreateItemCommand createItemCommand) {
+	public ResponseEntity<Item> addItem(@RequestBody @Valid CreateItemCommand createItemCommand) {
 		return this.itemService.addItem(createItemCommand);
 	}
+	
+	
+	
+	
+//	@RequestMapping(path = "/items/getItem/{itemid}", method = RequestMethod.PUT)
+//	public Item modifyItem(@PathVariable final Long itemid,
+//			@RequestBody @Valid CreateItemCommand createItemCommand) {
+//		return this.service.modifyItem(itemid, createItemCommand);
+//	}
+	
+//	@RequestMapping(path = "/delete/item/{itemid}", method = RequestMethod.DELETE)
+//	public String deleteItem(@PathVariable final long itemid) {
+//		return this.service.deleteItem(itemid);
+//	}
 }
