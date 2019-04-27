@@ -15,10 +15,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eamada.storage.CreateCustomerCommand;
+import com.eamada.storage.CreateInvoiceCommand;
 import com.eamada.storage.CreateItemCommand;
 import com.eamada.storage.model.Customer;
+import com.eamada.storage.model.Invoice;
 import com.eamada.storage.model.Item;
 import com.eamada.storage.service.CustomerService;
+import com.eamada.storage.service.InvoiceService;
+import com.eamada.storage.service.ItemService;
 
 @RestController
 @RequestMapping(value="/api/storage")
@@ -26,6 +30,19 @@ import com.eamada.storage.service.CustomerService;
 public class StorageController {
 	@Autowired
 	private CustomerService service;
+	
+	@Autowired
+	private InvoiceService invoiceService;
+	
+	@Autowired
+	private ItemService itemService;
+	
+	@RequestMapping(path = "/deleteAllData", method = RequestMethod.DELETE)
+	public void deleteAllData() {
+		this.service.deleteAllData();
+	}
+	
+	//From there, path = /customers
 	
 	@RequestMapping(path = "/customers/getCustomers", method = RequestMethod.GET)
 	public Collection<Customer> getCustomers() {
@@ -37,21 +54,10 @@ public class StorageController {
 		return this.service.getCustomer(customerid);
 	}
 	
-	@RequestMapping(path = "/{customerid}/items", method = RequestMethod.GET)
-	public Collection<Item> getItems(@PathVariable final Long customerid) {
-		return this.service.getItems(customerid);
-	}
-	
 	@RequestMapping(path = "/customers/addCustomer", method = RequestMethod.POST)
 	public ResponseEntity<Customer> addCustomer(@RequestBody @Valid CreateCustomerCommand
 			createCustomerCommand) {
 		return this.service.addCustomer(createCustomerCommand);
-	}
-	
-	@RequestMapping(value = "{customerid}/item", method = RequestMethod.POST)
-	public Item addItem(@PathVariable @Valid final Long customerid,
-			@RequestBody @Valid CreateItemCommand createItemCommand) {
-		return this.service.addItem(customerid, createItemCommand);
 	}
 	
 	@RequestMapping(path = "/customers/setCustomer/{customerid}", method = RequestMethod.PUT)
@@ -60,20 +66,9 @@ public class StorageController {
 		return this.service.modifyCustomer(customerid, createCustomerCommand);
 	}
 	
-	@RequestMapping(path = "{itemid}/item", method = RequestMethod.PUT)
-	public Item modifyItem(@PathVariable final Long itemid,
-			@RequestBody @Valid CreateItemCommand createItemCommand) {
-		return this.service.modifyItem(itemid, createItemCommand);
-	}
-	
 	@RequestMapping(path = "/customers/deleteCustomer/{customerid}", method = RequestMethod.DELETE)
 	public String deleteCustomer(@PathVariable final Long customerid) {
 		return this.service.deleteCustomer(customerid);
-	}
-	
-	@RequestMapping(path = "/delete/item/{itemid}", method = RequestMethod.DELETE)
-	public String deleteItem(@PathVariable final long itemid) {
-		return this.service.deleteItem(itemid);
 	}
 
 	@RequestMapping(path = "/customers/prefillName/{customerNameFragment}",
@@ -90,8 +85,53 @@ public class StorageController {
 		return this.service.getCustomersMatchingVatcode(customerVatcodeFragment);
 	}
 	
-	@RequestMapping(path = "/deleteAllData", method = RequestMethod.DELETE)
-	public void deleteAllData() {
-		this.service.deleteAllData();
+	//From there, path = /invoices
+	
+	@RequestMapping(path = "/invoices/getInvoiceById/{invoiceId}", method = RequestMethod.GET)
+	public Invoice getInvoiceById(@PathVariable Long invoiceId) {
+		return this.invoiceService.getInvoiceById(invoiceId);
 	}
+	
+	@RequestMapping(path = "/invoices/addInvoice/{customerId}", method = RequestMethod.POST)
+	public Invoice addInvoice(@PathVariable Long customerId, @RequestBody @Valid
+			CreateInvoiceCommand createInvoiceCommand) {
+		return this.invoiceService.addInvoice(customerId, createInvoiceCommand);
+	}
+	
+	@RequestMapping(path = "invoices/setInvoice/{invoiceId}", method = RequestMethod.PUT)
+	public Invoice setInvoice(@PathVariable Long invoiceId, @RequestBody CreateInvoiceCommand
+			createInvoiceCommand) {
+		return this.invoiceService.modifyInvoice(invoiceId, createInvoiceCommand);
+	}
+	
+	//From there, path = /items
+	
+	@RequestMapping(path = "/items/getItems", method = RequestMethod.GET)
+	public ResponseEntity<Collection<Item>> getItems() {
+		return this.itemService.getItems();
+	}
+	
+	@RequestMapping(path = "/items/getItem/{itemId}", method = RequestMethod.GET)
+	public ResponseEntity<Item> getItem(@PathVariable Long itemId) {
+		return this.itemService.getItem(itemId);
+	}
+	
+	@RequestMapping(path = "/items/addItem", method = RequestMethod.POST)
+	public ResponseEntity<Item> addItem(@RequestBody @Valid CreateItemCommand createItemCommand) {
+		return this.itemService.addItem(createItemCommand);
+	}
+	
+	
+	
+	
+//	@RequestMapping(path = "/items/getItem/{itemid}", method = RequestMethod.PUT)
+//	public Item modifyItem(@PathVariable final Long itemid,
+//			@RequestBody @Valid CreateItemCommand createItemCommand) {
+//		return this.service.modifyItem(itemid, createItemCommand);
+//	}
+	
+//	@RequestMapping(path = "/delete/item/{itemid}", method = RequestMethod.DELETE)
+//	public String deleteItem(@PathVariable final long itemid) {
+//		return this.service.deleteItem(itemid);
+//	}
 }
