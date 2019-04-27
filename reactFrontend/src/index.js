@@ -14,11 +14,11 @@ import ItemForm from './components/ItemForm';
 ReactDOM.render(
   <HashRouter>
       <div>
-        <Route path = "/" component={Navigation} />
+        <Route exact path = "/" component={Navigation} />
         <Route exact path='/customers' component={App} />
         <Route path='/customers/addCustomer' component={Create} />
         <Route path='/customers/prefillCustomer' component={Prefill} />
-        <Route path='/items' component={ItemsList} />
+        <Route exact path='/items' component={ItemsList} />
         <Route path='/items/form' component={ItemForm} />
       </div>
   </HashRouter>,

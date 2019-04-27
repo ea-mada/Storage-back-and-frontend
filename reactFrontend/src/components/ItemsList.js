@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-import { Table, Button, Divider, message, Typography, Layout} from 'antd';
+import { Table, Button, Divider, message, Typography, Layout, Icon} from 'antd';
 const {Title} = Typography;
 const {Header, Content} = Layout;
 
@@ -71,7 +71,7 @@ class ItemsList extends React.Component {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
-      filters: this.state.invoices.map(({name}) => ({
+      filters: this.state.items.map(({name}) => ({
         text: name, value: name
       })),
       filteredValue: filteredInfo.name || null,
@@ -112,11 +112,11 @@ class ItemsList extends React.Component {
     return (
       <Layout>
         <Header>
-          <Button type='primary' onClick={this.props.history.push('/')}>
+          <Button type='primary' onClick={()=>this.props.history.push('/')}>
             <Icon type="left" />Back
           </Button>
           <Divider type="vertical" />
-          <Button type='primary' onClick={this.props.history.push('/items/form')} >
+          <Button type='primary' onClick={()=>this.props.history.push('/items/form')} >
             New Item
           </Button>
         </Header>

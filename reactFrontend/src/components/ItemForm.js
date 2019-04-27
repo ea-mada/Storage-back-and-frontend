@@ -1,50 +1,73 @@
 import React from 'react';
-import {Form, Input, Button} from 'antd';
+import axios from 'axios';
+import {Form, Input, Button, message} from 'antd';
   
-  class ItemForm extends React.Component {
+  class ItemsForm extends React.Component {
     
     handleSubmit = (e) => {
       e.preventDefault();
       this.props.form.validateFields((err, values) => {
         if (!err) {
           console.log('Received values of form: ', values);
+          axios.post('/items/addItem', values)
+          .then(()=>{
+            message.info(`Item ${values.name} was submited.`)
+            this.props.history.push('/')
+          })
         }
       });
+      
     }
   
     render() {
       const { getFieldDecorator } = this.props.form;
       return (
-        <Form layout="inline" onSubmit={this.handleSubmit}>
+        <Form layout="vertical" onSubmit={this.handleSubmit}>
           <Form.Item label="Name">
             {getFieldDecorator('name', {
               rules: [{ required: true, message: 'Please input item name.' }],
-            })}
-            <Input />
+            })(<Input />)}
+            
           </Form.Item>
           <Form.Item label="Quantity">
             {getFieldDecorator('quantity', {
-              rules: [{ required: true, message: 'Please input quantity.' },
-                {type: integer, message: 'Please input correct number of type integer.'}
+              rules: [
+                {
+                  required: true,
+                  type: 'integer',
+                  message: 'Please input valid number value.',
+                  transform(value) {
+                    return Number(value)}
+                  }
             ],
-            })}
-            <Input placeholder='cm'/>
+            })(<Input placeholder='cm'/>)}
+            
           </Form.Item>
           <Form.Item label="Height">
             {getFieldDecorator('height', {
-              rules: [{ required: true, message: 'Please input height.' },
-                {type: float, message: 'Please input correct number of type float.'}
+              rules: [{
+                required: true,
+                type: 'float',
+                message: 'Please input valid number value.',
+                transform(value) {
+                  return Number(value)}
+                }
             ],
-            })}
-            <Input placeholder='cm'/>
+            })(<Input placeholder='cm'/>)}
+            
           </Form.Item>
           <Form.Item label="Width">
             {getFieldDecorator('width', {
-              rules: [{ required: true, message: 'Please input width.' },
-                {type: float, message: 'Please input correct number of type float.'}
+              rules: [{
+                required: true,
+                type: 'float',
+                message: 'Please input valid number value.',
+                transform(value) {
+                  return Number(value)}
+                }
             ],
-            })}
-            <Input />
+            })(<Input />)}
+            
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit">Submit</Button>
@@ -54,5 +77,5 @@ import {Form, Input, Button} from 'antd';
     }
   }
   
-  const ItemForm = Form.create({ name: 'customized_form_controls' })(ItemForm);
+  const ItemForm = Form.create()(ItemsForm);
   export default ItemForm;
