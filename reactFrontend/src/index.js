@@ -9,6 +9,7 @@ import Prefill from './components/Prefill';
 import Navigation from './components/Navigation';
 import './axiosDefaults';
 import ItemsList from './components/ItemsList';
+import ItemForm from './components/ItemForm';
 
 ReactDOM.render(
   <HashRouter>
@@ -18,6 +19,7 @@ ReactDOM.render(
         <Route path='/customers/addCustomer' component={Create} />
         <Route path='/customers/prefillCustomer' component={Prefill} />
         <Route path='/items' component={ItemsList} />
+        <Route path='/items/form' component={ItemForm} />
       </div>
   </HashRouter>,
   document.getElementById('root')

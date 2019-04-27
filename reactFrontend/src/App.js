@@ -4,12 +4,9 @@ import axios from 'axios';
 
 class App extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      customers: []
-    };
-  }
+  state = {
+    customers: []
+  };
 
   componentDidMount() {
     axios.get('http://localhost:8080/api/storage/customers/getCustomers')

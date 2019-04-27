@@ -1,9 +1,9 @@
 import React from 'react'
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-import { Table, Button, Divider, message, Typography} from 'antd';
-import FormModalActions from './forms/invoiceForm/FormModalActions';
+import { Table, Button, Divider, message, Typography, Layout} from 'antd';
 const {Title} = Typography;
+const {Header, Content} = Layout;
 
 class ItemsList extends React.Component {
   state = {
@@ -104,27 +104,37 @@ class ItemsList extends React.Component {
           <Link to={{
             pathname: '/' + record.id,
           }}>Edit item</Link>
-          <Divider type='vertical' />
           <Divider type="vertical" />
           <Button type='danger' onClick={()=> this.handleItemDelete(record.id)}>Delete</Button>
         </span>
       ),
     }];
     return (
-      <div>
-        <Title>Items list</Title>
-        <div className="table-operations">
-          <Button onClick={this.clearFilters}>Clear filters</Button>
-          <Button onClick={this.clearAll}>Clear filters and sorters</Button>
-        </div>
-        <Table 
-          rowKey={record=>record.id} 
-          columns={columns} 
-          dataSource={this.state.invoices} 
-          onChange={this.handleChange} 
-          pagination={{pageSize: 8}}
-        />
-      </div>
+      <Layout>
+        <Header>
+          <Button type='primary' onClick={this.props.history.push('/')}>
+            <Icon type="left" />Back
+          </Button>
+          <Divider type="vertical" />
+          <Button type='primary' onClick={this.props.history.push('/items/form')} >
+            New Item
+          </Button>
+        </Header>
+        <Content>
+          <Title>Items list</Title>
+          <div className="table-operations">
+            <Button onClick={this.clearFilters}>Clear filters</Button>
+            <Button onClick={this.clearAll}>Clear filters and sorters</Button>
+          </div>
+          <Table 
+            rowKey={record=>record.id} 
+            columns={columns} 
+            dataSource={this.state.invoices} 
+            onChange={this.handleChange} 
+            pagination={{pageSize: 8}}
+          />
+        </Content>
+      </Layout>
     );
   }
 }
