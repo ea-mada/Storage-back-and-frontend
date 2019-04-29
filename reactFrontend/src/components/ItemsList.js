@@ -121,17 +121,17 @@ class ItemsList extends React.Component {
     }];
     return (
       <div>
-      {/* <Layout> */}
+      <Layout>
         <Header>
           <Button type='primary' onClick={()=>this.props.history.push('/')}>
             <Icon type="left" />Back
           </Button>
           <Divider type="vertical" />
           <Button type='primary' onClick={()=>this.props.history.push('/items/form')} >
-            New Item
+          <Icon type="form" />New Item
           </Button>
         </Header>
-        {/* <Content> */}
+        <Content>
           <Title>Items list</Title>
           <div className="table-operations">
             <Button onClick={this.clearFilters}>Clear filters</Button>
@@ -144,8 +144,8 @@ class ItemsList extends React.Component {
             onChange={this.handleChange} 
             pagination={{pageSize: 8}}
           />
-        {/* </Content> */}
-      {/* </Layout> */}
+        </Content>
+      </Layout>
       </div>
     );
   }

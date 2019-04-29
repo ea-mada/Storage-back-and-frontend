@@ -81,6 +81,9 @@ const {Option} = Select;
           <Form.Item>
             <Button type="primary" htmlType="submit">Submit</Button>
           </Form.Item>
+          <Form.Item>
+            <Button type='default' onClick={(props)=>this.props.history.push('/items')}>Cancel</Button>
+          </Form.Item>
         </Form>
       );
     }
