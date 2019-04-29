@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import {Form, Input, Button, message} from 'antd';
+import {Form, Input, Button, message, Select} from 'antd';
+const {Option} = Select;
   
   class ItemsForm extends React.Component {
     
@@ -12,7 +13,7 @@ import {Form, Input, Button, message} from 'antd';
           axios.post('/items/addItem', values)
           .then(()=>{
             message.info(`Item ${values.name} was submited.`)
-            this.props.history.push('/')
+            this.props.history.push('/items')
           })
         }
       });
@@ -29,44 +30,52 @@ import {Form, Input, Button, message} from 'antd';
             })(<Input />)}
             
           </Form.Item>
-          <Form.Item label="Quantity">
-            {getFieldDecorator('quantity', {
+          <Form.Item label="Price">
+            {getFieldDecorator('price', {
               rules: [
                 {
                   required: true,
-                  type: 'integer',
-                  message: 'Please input valid number value.',
+                  type: 'float',
+                  message: 'Please input a valid price value.',
                   transform(value) {
                     return Number(value)}
                   }
             ],
-            })(<Input placeholder='cm'/>)}
+            })(<Input placeholder='0.00'/>)}
             
           </Form.Item>
-          <Form.Item label="Height">
-            {getFieldDecorator('height', {
+          <Form.Item label="Unit of measurement">
+            {getFieldDecorator('unitOfMeasurement', {
               rules: [{
                 required: true,
-                type: 'float',
-                message: 'Please input valid number value.',
-                transform(value) {
-                  return Number(value)}
                 }
             ],
-            })(<Input placeholder='cm'/>)}
+            })(<Select
+                style={{ width: '32%' }}
+              >
+                <Option value="kg">kg</Option>
+                <Option value="g">g</Option>
+                <Option value="piece">piece</Option>
+                <Option value="l">l</Option>
+                <Option value="ml">ml</Option>
+              </Select>)}
             
           </Form.Item>
-          <Form.Item label="Width">
-            {getFieldDecorator('width', {
+          <Form.Item label="Category">
+            {getFieldDecorator('category', {
               rules: [{
                 required: true,
-                type: 'float',
-                message: 'Please input valid number value.',
-                transform(value) {
-                  return Number(value)}
                 }
             ],
-            })(<Input />)}
+            })(<Select
+                style={{ width: '32%' }}
+              >
+                <Option value="CATEGORY1">CATEGORY1</Option>
+                <Option value="CAT2">CAT2</Option>
+                <Option value="CA3">CA3</Option>
+                <Option value="DFBUVUBVIDUVHSOI">DFBUVUBVIDUVHSOI</Option>
+                <Option value="DFDFDHYJUKERETRE">DFDFDHYJUKERETRE</Option>
+              </Select>)}
             
           </Form.Item>
           <Form.Item>

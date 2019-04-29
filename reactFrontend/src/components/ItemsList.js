@@ -79,23 +79,33 @@ class ItemsList extends React.Component {
       sorter: (a, b) => this.nameSorter(a.name, b.name),
       sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
     }, {
-      title: 'Quantity',
-      dataIndex: 'quantity',
-      key: 'quantity',
-      sorter: (a, b) => a.quantity - b.quantity,
-      sortOrder: sortedInfo.columnKey === 'quantity' && sortedInfo.order,
+      title: 'Category',
+      dataIndex: 'category',
+      key: 'category',
+      filters: this.state.items.map(({category}) => ({
+        text: category, value: category
+      })),
+      filteredValue: filteredInfo.category || null,
+      onFilter: (value, record) => record.category.includes(value),
+      sorter: (a, b) => this.nameSorter(a.category, b.category),
+      sortOrder: sortedInfo.columnKey === 'category' && sortedInfo.order,
     }, {
-      title: 'Height (cm)',
-      dataIndex: 'heightCm',
-      key: 'heightCm',
-      sorter: (a, b) => a.heightCm - b.heightCm,
-      sortOrder: sortedInfo.columnKey === 'heightCm' && sortedInfo.order,
+      title: 'Unit of measurement',
+      dataIndex: 'unitOfMeasurement',
+      key: 'unitOfMeasurement',
+      filters: this.state.items.map(({unitOfMeasurement}) => ({
+        text: unitOfMeasurement, value: unitOfMeasurement
+      })),
+      filteredValue: filteredInfo.unitOfMeasurement || null,
+      onFilter: (value, record) => record.unitOfMeasurement.includes(value),
+      sorter: (a, b) => this.nameSorter(a.unitOfMeasurement, b.unitOfMeasurement),
+      sortOrder: sortedInfo.columnKey === 'unitOfMeasurement' && sortedInfo.order,
     }, {
-      title: 'Width (cm)',
-      dataIndex: 'widthCm',
-      key: 'widthCm',
-      sorter: (a, b) => a.widthCm - b.widthCm,
-      sortOrder: sortedInfo.columnKey === 'widthCm' && sortedInfo.order,
+      title: 'Price',
+      dataIndex: 'price',
+      key: 'price',
+      sorter: (a, b) => a.price - b.price,
+      sortOrder: sortedInfo.columnKey === 'price' && sortedInfo.order,
     }, {
       title: 'Action',
       key: 'action',
@@ -110,7 +120,8 @@ class ItemsList extends React.Component {
       ),
     }];
     return (
-      <Layout>
+      <div>
+      {/* <Layout> */}
         <Header>
           <Button type='primary' onClick={()=>this.props.history.push('/')}>
             <Icon type="left" />Back
@@ -120,21 +131,22 @@ class ItemsList extends React.Component {
             New Item
           </Button>
         </Header>
-        <Content>
+        {/* <Content> */}
           <Title>Items list</Title>
           <div className="table-operations">
             <Button onClick={this.clearFilters}>Clear filters</Button>
             <Button onClick={this.clearAll}>Clear filters and sorters</Button>
           </div>
           <Table 
-            rowKey={record=>record.id} 
+            rowKey={record=>record.itemId} 
             columns={columns} 
-            dataSource={this.state.invoices} 
+            dataSource={this.state.items} 
             onChange={this.handleChange} 
             pagination={{pageSize: 8}}
           />
-        </Content>
-      </Layout>
+        {/* </Content> */}
+      {/* </Layout> */}
+      </div>
     );
   }
 }
