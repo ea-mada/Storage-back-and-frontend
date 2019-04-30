@@ -67,15 +67,11 @@ class ItemsList extends React.Component {
     let { sortedInfo, filteredInfo } = this.state;
     sortedInfo = sortedInfo || {};
     filteredInfo = filteredInfo || {};
+  
     const columns = [{
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
-      filters: this.state.items.map(({name}) => ({
-        text: name, value: name
-      })),
-      filteredValue: filteredInfo.name || null,
-      onFilter: (value, record) => record.name.includes(value),
       sorter: (a, b) => this.nameSorter(a.name, b.name),
       sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
     }, {
@@ -84,7 +80,12 @@ class ItemsList extends React.Component {
       key: 'category',
       filters: this.state.items.map(({category}) => ({
         text: category, value: category
-      })),
+      })).reduce((unique, o) => {
+        if(!unique.some(obj => obj.text === o.text && obj.value === o.value)) {
+          unique.push(o);
+        }
+        return unique;
+      },[]),
       filteredValue: filteredInfo.category || null,
       onFilter: (value, record) => record.category.includes(value),
       sorter: (a, b) => this.nameSorter(a.category, b.category),
@@ -95,7 +96,12 @@ class ItemsList extends React.Component {
       key: 'unitOfMeasurement',
       filters: this.state.items.map(({unitOfMeasurement}) => ({
         text: unitOfMeasurement, value: unitOfMeasurement
-      })),
+      })).reduce((unique, o) => {
+        if(!unique.some(obj => obj.text === o.text && obj.value === o.value)) {
+          unique.push(o);
+        }
+        return unique;
+      },[]),
       filteredValue: filteredInfo.unitOfMeasurement || null,
       onFilter: (value, record) => record.unitOfMeasurement.includes(value),
       sorter: (a, b) => this.nameSorter(a.unitOfMeasurement, b.unitOfMeasurement),
