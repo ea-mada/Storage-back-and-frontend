@@ -38,7 +38,7 @@ class App extends Component {
               <tbody>
                 {this.state.customers.map(c =>
                   <tr key={c.customerid}>
-                    <td>{c.name}</td>
+                    <td><Link to={`/customers/showCustomer/${c.customerid}`}>{c.name}</Link></td>
                     <td>{c.address}</td>
                   </tr>
                 )}
