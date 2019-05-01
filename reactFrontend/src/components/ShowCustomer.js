@@ -58,10 +58,10 @@ let newInvoices = this.state.invoices;
               <dd>{this.state.customer.notes}</dd>
             </dl>
             <Link to={`/editCustomer/${this.state.customer.customerid}`} className="btn btn-success">Edit</Link>&nbsp;
-            <button onClick={this.delete.bind(this, this.state.customer.customerid)} className="btn btn-danger">Delete</button>
+            <Button color="danger" onClick={this.delete.bind(this, this.state.customer.customerid)} >Delete</Button>
 
         <div>
-          <h3>Items</h3>
+          <h3>Invoices</h3>
           <div>
             <table>
               <thead>
@@ -87,7 +87,7 @@ let newInvoices = this.state.invoices;
               </tbody>
             </table>
             
-            <Link to={`/addInvoice/${this.state.customer.customerid}`}>Add New Invoice</Link>
+            <Link to={`invoices/addInvoice/${this.state.customer.customerid}`}>Add New Invoice</Link>
           </div>
         </div>
       </div>
