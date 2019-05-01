@@ -1,6 +1,6 @@
 #FileLock
-#Tue Apr 30 15:56:46 EEST 2019
-server=127.0.1.1\:35943
-hostName=mindaugas-virtual-machine
+#Wed May 01 08:35:22 EEST 2019
+server=192.168.56.1\:64424
+hostName=DESKTOP-ONIGVUD
 method=file
-id=16a6e519e7af169e69c607b80a99815780af78ca2bc
+id=16a71e3ccaf30010da7156035cf5ea1a0fb713360a4

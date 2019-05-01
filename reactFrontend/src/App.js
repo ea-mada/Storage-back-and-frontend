@@ -31,8 +31,8 @@ class App extends Component {
             <table className="table table-stripe">
               <thead>
                 <tr>
-                  <th>VAT code</th>
                   <th>Name</th>
+                  <th>Address</th>
                 </tr>
               </thead>
               <tbody>
