@@ -28,7 +28,7 @@ class App extends Component {
           <div className="panel-body">
             <h4><Link to="/customers/addCustomer"><span className="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Customer</Link></h4>
             <h4><Link to="/customers/prefillCustomer"><span className="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Pre-fill Customer</Link></h4>
-            <table className="table table-stripe">
+            <table className="table table-stripe" id="white-in-black-tr">
               <thead>
                 <tr>
                   <th>Name</th>
