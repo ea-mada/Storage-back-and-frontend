@@ -77,7 +77,7 @@ let newInvoices = this.state.invoices;
                   <td>{i.dateOfPurchase}</td>
                   <td>{i.receivingCompany}</td>
                   <td>{i.distributor}</td>
-                  <td><Button color="danger" onClick={()=>this.deleteInvoice(i.invoiceId)}>Danger!</Button></td>
+                  <td><Button color="danger" onClick={()=>this.deleteInvoice(i.invoiceId)}>Delete Invoice</Button></td>
                   
                   {/* <td><button type="button" className="btn btn-danger" onClick={()=>this.deleteInvoice(i.invoiceId)}>Delete</button></td> */}
                  
