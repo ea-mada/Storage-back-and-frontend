@@ -22,6 +22,7 @@ import com.eamada.storage.model.Category;
 import com.eamada.storage.model.Customer;
 import com.eamada.storage.model.Invoice;
 import com.eamada.storage.model.Item;
+import com.eamada.storage.model.UnitOfMeasurement;
 import com.eamada.storage.service.CustomerService;
 import com.eamada.storage.service.InvoiceService;
 import com.eamada.storage.service.ItemService;
@@ -111,6 +112,11 @@ public class StorageController {
 	@GetMapping("/items/categories")
 	public ResponseEntity<Category[]> getCategories() {
 		return this.itemService.getCategories();
+	}
+	
+	@GetMapping("/items/unitsOfMeasurement")
+	public ResponseEntity<UnitOfMeasurement[]> getUnitsOfMeasurement() {
+		return this.itemService.getUnitsOfMeasurement();
 	}
 	
 	@RequestMapping(path = "/items/getItems", method = RequestMethod.GET)

@@ -12,6 +12,7 @@ const {Option} = Select;
    componentWillMount(){
      axios.get('/items/categories')
        .then(response =>{
+         console.log(response.data);
          this.setState({
            categories: response.data
          })
