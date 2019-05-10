@@ -6,14 +6,22 @@ const {Option} = Select;
   class ItemsForm extends React.Component {
     
     state = {
-      categories:[]
+      categories:[],
+      unitsOfMeasurement:[]
     }
 
-    componentWillMount(){
+    componentWillMount() {
       axios.get('/items/categories')
         .then(response =>{
           this.setState({
             categories: response.data
+          })
+          console.log(response)
+      })
+      axios.get('/items/unitsOfMeasurement')
+        .then(response =>{
+          this.setState({
+            unitsOfMeasurement: response.data
           })
         })
     }
@@ -34,6 +42,7 @@ const {Option} = Select;
     }
   
     render() {
+      
       const { getFieldDecorator } = this.props.form;
       return (
         <Form layout="vertical" onSubmit={this.handleSubmit}>
@@ -48,9 +57,8 @@ const {Option} = Select;
               rules: [
                 {
                   required: true,
-                  type: 'regexp',
-                  message: 'Please input a valid price value.',
-                  pattern: new RegExp("[0-9]+(\.[0-9][0-9]?)?")
+                  pattern: new RegExp("^[0-9]+(\.[0-9]{1,2})?$"),
+                  message: 'Please input valid price value.',
                 },
             ],
             })(<Input placeholder='0.00'/>)}
@@ -65,11 +73,11 @@ const {Option} = Select;
             })(<Select
                 style={{ width: '32%' }}
               >
-                <Option value="kg">kg</Option>
-                <Option value="g">g</Option>
-                <Option value="piece">piece</Option>
-                <Option value="l">l</Option>
-                <Option value="ml">ml</Option>
+              {
+                  this.state.unitsOfMeasurement.map(unit =>
+                  <Option key={unit} value={unit}>{unit}</Option>
+                  )
+              }
               </Select>)}
             
           </Form.Item>
@@ -82,15 +90,11 @@ const {Option} = Select;
             })(<Select
                 style={{ width: '32%' }}
               >
-                {this.state.categories.map((category) =>{
-                  <Option value={`${category}`}>{`${category}`}</Option>
-                })}
-                {/* <Option value="CATEGORY1">CATEGORY1</Option>
-                <Option value="CAT2">CAT2</Option>
-                <Option value="CA3">CA3</Option>
-                <Option value="DFBUVUBVIDUVHSOI">DFBUVUBVIDUVHSOI</Option>
-                <Option value="DFDFDHYJUKERETRE">DFDFDHYJUKERETRE</Option> */}
-
+                {
+                  this.state.categories.map(category =>
+                  <Option key={category} value={category}>{category}</Option>
+                  )
+                }
               </Select>)}
             
           </Form.Item>
