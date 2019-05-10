@@ -169,7 +169,7 @@ class Prefill extends Component {
       <div>
       <label htmlFor="vatCode">VatCode:</label>
                 <input id="customerVatcodeFragmentId" onChange={this.onChangeVatcodeField} type="text" className="form-control" name="vatCode" value={vatCode} placeholder="vatCode" />
-                <table>
+                <table id="white-in-black-tr">
         <tbody>
           {customerVatcodesAndIds.slice(0, 20).map(c =>
           customerVatcodesAndIds.length > 20 ?
@@ -189,7 +189,7 @@ class Prefill extends Component {
       <div className="form-group">
                 <label htmlFor="name">Name:</label>
                 <input id="customerNameFragmentId" type="text" className="form-control" name="name" value={name} onChange={this.onChangeNameField} placeholder="customer name" />
-                <table>
+                <table id="white-in-black-tr">
       <tbody>
       {customerNamesAndIds.slice(0, 20).map(c =>
       customerNamesAndIds.length > 20 ?

@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.eamada.storage.CreateCustomerCommand;
 import com.eamada.storage.CreateInvoiceCommand;
 import com.eamada.storage.CreateItemCommand;
+import com.eamada.storage.model.Category;
 import com.eamada.storage.model.Customer;
 import com.eamada.storage.model.Invoice;
 import com.eamada.storage.model.Item;
@@ -105,6 +107,11 @@ public class StorageController {
 	}
 	
 	//From there, path = /items
+	
+	@GetMapping("/items/categories")
+	public ResponseEntity<Category[]> getCategories() {
+		return this.itemService.getCategories();
+	}
 	
 	@RequestMapping(path = "/items/getItems", method = RequestMethod.GET)
 	public ResponseEntity<Collection<Item>> getItems() {
