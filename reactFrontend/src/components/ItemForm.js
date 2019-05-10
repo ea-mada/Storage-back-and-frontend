@@ -5,6 +5,19 @@ const {Option} = Select;
   
   class ItemsForm extends React.Component {
     
+    state = {
+      categories:[]
+    }
+
+    componentWillMount(){
+      axios.get('/items/categories')
+        .then(response =>{
+          this.setState({
+            categories: response.data
+          })
+        })
+    }
+
     handleSubmit = (e) => {
       e.preventDefault();
       this.props.form.validateFields((err, values) => {
@@ -35,11 +48,10 @@ const {Option} = Select;
               rules: [
                 {
                   required: true,
-                  type: 'float',
+                  type: 'regexp',
                   message: 'Please input a valid price value.',
-                  transform(value) {
-                    return Number(value)}
-                  }
+                  pattern: new RegExp("[0-9]+(\.[0-9][0-9]?)?")
+                },
             ],
             })(<Input placeholder='0.00'/>)}
             
@@ -70,11 +82,15 @@ const {Option} = Select;
             })(<Select
                 style={{ width: '32%' }}
               >
-                <Option value="CATEGORY1">CATEGORY1</Option>
+                {this.state.categories.map((category) =>{
+                  <Option value={`${category}`}>{`${category}`}</Option>
+                })}
+                {/* <Option value="CATEGORY1">CATEGORY1</Option>
                 <Option value="CAT2">CAT2</Option>
                 <Option value="CA3">CA3</Option>
                 <Option value="DFBUVUBVIDUVHSOI">DFBUVUBVIDUVHSOI</Option>
-                <Option value="DFDFDHYJUKERETRE">DFDFDHYJUKERETRE</Option>
+                <Option value="DFDFDHYJUKERETRE">DFDFDHYJUKERETRE</Option> */}
+
               </Select>)}
             
           </Form.Item>

@@ -1,6 +1,6 @@
 #FileLock
-#Tue Apr 30 15:56:46 EEST 2019
-server=127.0.1.1\:35943
-hostName=mindaugas-virtual-machine
+#Fri May 10 10:43:18 EEST 2019
+server=127.0.1.1\:45021
+hostName=kestenis-VirtualBox
 method=file
-id=16a6e519e7af169e69c607b80a99815780af78ca2bc
+id=16aa0b239c37313626ec57c6335c8c28ee83f70be16
