@@ -5,5 +5,6 @@ public enum Category {
 	CAT2,
 	CA3,
 	DFBUVUBVIDUVHSOI,
-	DFDFDHYJUKERETRE
+	DFDFDHYJUKERETRE,
+	Boots
 }

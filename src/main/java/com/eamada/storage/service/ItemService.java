@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.eamada.storage.CreateItemCommand;
+import com.eamada.storage.model.Category;
 import com.eamada.storage.model.Item;
 import com.eamada.storage.repository.ItemRepository;
 
@@ -33,6 +34,10 @@ public class ItemService {
 				createItemCommand.getCategory(), createItemCommand.getPrice());
 		this.itemRepository.save(newItem);
 		return new ResponseEntity<>(newItem, HttpStatus.OK) ;
+	}
+	
+	public ResponseEntity<Category[]> getCategories() {
+		return ResponseEntity.ok().body(Category.values());
 	}
 	
 }

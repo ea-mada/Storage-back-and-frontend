@@ -8,7 +8,7 @@ const Navigation = () => {
         <div>
             <h4>
                 <Link to="/customers">
-                    <span className="glyphicon glyphicon-th-list" aria-hidden="true"></span> 
+                    <span className="glyphicon glyphicon-th-list" aria-hidden="true">aaa</span> 
                     Customer List
                 </Link>
             </h4>
@@ -18,6 +18,7 @@ const Navigation = () => {
                     Items List
                 </Link>
             </h4>
+                
         </div>
     );
     

@@ -42,7 +42,7 @@ let newInvoices = this.state.invoices;
             <h3 className="panel-title">
               Customers
             </h3>
-            <h4><Link to="/"><span className="glyphicon glyphicon-th-list" aria-hidden="true"></span> Customer List</Link></h4>
+            <h4><Link to="/customers"><span className="glyphicon glyphicon-th-list" aria-hidden="true"></span> Customer List</Link></h4>
             <dl>
               <dt>name:</dt>
               <dd>{this.state.customer.name}</dd>
