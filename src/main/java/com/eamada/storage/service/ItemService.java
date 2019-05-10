@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.eamada.storage.CreateItemCommand;
 import com.eamada.storage.model.Category;
 import com.eamada.storage.model.Item;
+import com.eamada.storage.model.UnitOfMeasurement;
 import com.eamada.storage.repository.ItemRepository;
 
 @Service
@@ -40,4 +41,7 @@ public class ItemService {
 		return ResponseEntity.ok().body(Category.values());
 	}
 	
+	public ResponseEntity<UnitOfMeasurement[]> getUnitsOfMeasurement() {
+		return ResponseEntity.ok().body(UnitOfMeasurement.values());
+	}
 }
