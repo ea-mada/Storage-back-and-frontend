@@ -12,9 +12,11 @@ import './axiosDefaults';
 import ItemsList from './components/ItemsList';
 import ItemForm from './components/ItemForm';
 import { NotFound } from './components/NotFound';
+import HeaderMenu from './components/HeaderMenu';
 
 ReactDOM.render(
   <HashRouter>
+      <HeaderMenu />
       <Switch>
         <Route exact path = "/" component={Navigation} />
         <Route exact path='/customers' component={App} />

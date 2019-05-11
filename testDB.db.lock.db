@@ -1,0 +1,6 @@
+#FileLock
+#Sat May 11 18:07:32 EEST 2019
+hostName=mindaugas-VirtualBox
+id=16aa76f53240214b19a5d6cd6dc3ab785575af2fb4d
+method=file
+server=127.0.1.1\:40509
