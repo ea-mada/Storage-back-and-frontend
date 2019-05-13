@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,9 +22,11 @@ import com.eamada.storage.CreateItemCommand;
 import com.eamada.storage.model.Category;
 import com.eamada.storage.model.Customer;
 import com.eamada.storage.model.Invoice;
+import com.eamada.storage.model.InvoiceItem;
 import com.eamada.storage.model.Item;
 import com.eamada.storage.model.UnitOfMeasurement;
 import com.eamada.storage.service.CustomerService;
+import com.eamada.storage.service.InvoiceItemService;
 import com.eamada.storage.service.InvoiceService;
 import com.eamada.storage.service.ItemService;
 
@@ -39,6 +42,9 @@ public class StorageController {
 	
 	@Autowired
 	private ItemService itemService;
+	
+	@Autowired
+	private InvoiceItemService invoiceItemService;
 	
 	@RequestMapping(path = "/deleteAllData", method = RequestMethod.DELETE)
 	public void deleteAllData() {
@@ -134,7 +140,17 @@ public class StorageController {
 		return this.itemService.addItem(createItemCommand);
 	}
 	
+	//inoiceeItems
 	
+	@GetMapping(path = "/invoice-items")
+	public Collection<InvoiceItem> getInvoiceItems() {
+		return this.invoiceItemService.getAll();
+	}
+	
+	@PostMapping("/invoice-items")
+	public void addInvoiceItem(Long invoiceId, Long itemId, int quantity) {
+		this.invoiceItemService.addInvoiceItem(invoiceId, itemId, quantity);
+	}
 	
 	
 //	@RequestMapping(path = "/items/getItem/{itemid}", method = RequestMethod.PUT)

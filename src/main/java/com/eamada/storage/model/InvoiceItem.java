@@ -34,5 +34,6 @@ public class InvoiceItem implements Serializable  {
 		this.invoice = invoice;
 		this.quantity = quantity;
 		this.item = item;
+		
 	}
 }
