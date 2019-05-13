@@ -3,13 +3,13 @@ package com.eamada.storage.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -30,13 +30,8 @@ public class Invoice {
 //    @Column(columnDefinition="constant")
     private String distributor;
 
-    @ManyToMany
-    @JoinTable(
-            name = "invoice_item",
-            joinColumns = @JoinColumn(name = "invoice_id"),
-            inverseJoinColumns = @JoinColumn(name = "item_id")
-    )
-    private List<Item> items;
+    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL)
+    private List<InvoiceItem> invoiceItems;
     
     @ManyToOne
     @JoinColumn(name = "customerId")
@@ -52,48 +47,14 @@ public class Invoice {
     	return customer;
     }
 
-    public Invoice(){}
+    public Invoice(){
+    	
+    }
 
     public Invoice(String receivingCompany, String distributor) {
         this.receivingCompany = receivingCompany;
         this.distributor = distributor;
     }
-
-	public Long getInvoiceId() {
-		return invoiceId;
-	}
-
-	public void setInvoiceId(Long invoiceId) {
-		this.invoiceId = invoiceId;
-	}
-
-	public String getReceivingCompany() {
-		return receivingCompany;
-	}
-
-	public void setReceivingCompany(String receivingCompany) {
-		this.receivingCompany = receivingCompany;
-	}
-
-	public LocalDate getDateOfPurchase() {
-		return dateOfPurchase;
-	}
-
-	public void setDateOfPurchase(LocalDate dateOfPurchase) {
-		this.dateOfPurchase = dateOfPurchase;
-	}
-
-	public String getDistributor() {
-		return distributor;
-	}
-
-	public List<Item> getItems() {
-		return items;
-	}
-
-	public void setItems(List<Item> items) {
-		this.items = items;
-	}
 
     
 }
