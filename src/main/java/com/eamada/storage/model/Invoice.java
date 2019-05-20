@@ -46,6 +46,8 @@ public class Invoice {
     public Customer getCustomer() {
     	return customer;
     }
+    
+    public Invoice() { }
 
     public Invoice(String receivingCompany, String distributor) {
         this.receivingCompany = receivingCompany;

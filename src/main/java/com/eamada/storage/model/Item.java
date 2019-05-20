@@ -28,6 +28,8 @@ public class Item {
 
     @OneToMany(mappedBy = "item")
     private Set<InvoiceItem> invoicesItems;
+    
+    public Item() { }
 
 	public Item(String name, UnitOfMeasurement unitOfMeasurement, Category category, double price) {
 		this.name = name;

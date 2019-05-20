@@ -22,8 +22,18 @@ public class InvoiceItem {
 	
 	@ManyToOne
 	@MapsId("itemId")
-	@JoinTable(name = "itemId")
+	@JoinColumn(name = "itemId")
 	Item item;
 	
 	int quantity;
+	
+	public InvoiceItem() { }
+
+	public InvoiceItem(Invoice invoice, Item item, int quantity) {
+		this.invoice = invoice;
+		this.item = item;
+		this.quantity = quantity;
+	}
+	
+	
 }
