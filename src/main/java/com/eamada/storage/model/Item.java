@@ -1,15 +1,14 @@
 package com.eamada.storage.model;
 
-import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import lombok.Data;
 
@@ -27,66 +26,18 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    @ManyToMany
-    @JoinTable(
-            name = "invoice_item",
-            joinColumns = @JoinColumn(name = "item_id"),
-            inverseJoinColumns = @JoinColumn(name = "invoice_id")
-    )
-    private List<Invoice> invoices;
+    @OneToMany(mappedBy = "item")
+    private Set<InvoiceItem> invoicesItems;
 
-    public Item(){}
-
-    public Item(String name, UnitOfMeasurement unitOfMeasurement, Category category, double price) {
-    	this.name = name;
-    	this.unitOfMeasurement = unitOfMeasurement;
-    	this.category = category;
-    	this.price = price;
-    }
-
-	public Long getItemId() {
-		return itemId;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
+	public Item(String name, UnitOfMeasurement unitOfMeasurement, Category category, double price) {
 		this.name = name;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
 		this.price = price;
-	}
-
-	public UnitOfMeasurement getUnitOfMeasurement() {
-		return unitOfMeasurement;
-	}
-
-	public void setUnitOfMeasurement(UnitOfMeasurement unitOfMeasurement) {
 		this.unitOfMeasurement = unitOfMeasurement;
-	}
-
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
 		this.category = category;
 	}
+    
+    
 
-	public List<Invoice> getInvoices() {
-		return invoices;
-	}
-
-	public void setInvoices(List<Invoice> invoices) {
-		this.invoices = invoices;
-	}
     
 //    public Item(String name, double price, UnitOfMeasurement unitOfMeasurement, int quantity) {
 //        this.name = name;
