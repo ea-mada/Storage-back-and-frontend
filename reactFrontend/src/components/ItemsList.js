@@ -118,7 +118,7 @@ class ItemsList extends React.Component {
       render: (text, record) => (
         <span>
           <Link to={{
-            pathname: '/' + record.id,
+            pathname: '/items/' + record.itemId,
           }}>Edit item</Link>
           <Divider type="vertical" />
           <Button type='danger' onClick={()=> this.handleItemDelete(record.id)}>Delete</Button>

@@ -15,7 +15,7 @@ public class InvoiceService {
 	private InvoiceRepository invoiceRepository;
     private CustomerRepository customerRepository;
     
-    @Autowired
+    
     public InvoiceService(InvoiceRepository invoiceRepository, CustomerRepository customerRepository) {
     	super();
         this.invoiceRepository = invoiceRepository;

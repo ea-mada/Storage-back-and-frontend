@@ -37,6 +37,18 @@ public class ItemService {
 		return new ResponseEntity<>(newItem, HttpStatus.OK) ;
 	}
 	
+	public ResponseEntity<Item> editItem(CreateItemCommand createItemCommand, Long itemId) {
+		Item oldItem = this.itemRepository.findById(itemId).orElse(null);
+		
+		oldItem.setName(createItemCommand.getName());
+		oldItem.setCategory(createItemCommand.getCategory());
+		oldItem.setPrice(createItemCommand.getPrice());
+		oldItem.setUnitOfMeasurement(createItemCommand.getUnitOfMeasurement());
+		this.itemRepository.save(oldItem);
+		
+		return new ResponseEntity<>(oldItem, HttpStatus.OK) ;
+	}
+	
 	public ResponseEntity<Category[]> getCategories() {
 		return ResponseEntity.ok().body(Category.values());
 	}

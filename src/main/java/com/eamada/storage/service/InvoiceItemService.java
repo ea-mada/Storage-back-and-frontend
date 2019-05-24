@@ -10,11 +10,12 @@ import com.eamada.storage.repository.ItemRepository;
 
 @Service
 public class InvoiceItemService {
+	
 	private InvoiceRepository invoiceRepository;
 	private ItemRepository itemRepository;
 	private InvoiceItemRepository InvoiceItemRepository;
 	
-	@Autowired
+	
 	public InvoiceItemService(InvoiceRepository invoiceRepository, ItemRepository itemRepository,
 			InvoiceItemRepository invoiceItemRepository) {
 		this.invoiceRepository = invoiceRepository;

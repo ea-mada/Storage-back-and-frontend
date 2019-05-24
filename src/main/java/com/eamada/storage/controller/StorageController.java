@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -139,6 +140,12 @@ public class StorageController {
 	@RequestMapping(path = "/items/addItem", method = RequestMethod.POST)
 	public ResponseEntity<Item> addItem(@RequestBody @Valid CreateItemCommand createItemCommand) {
 		return this.itemService.addItem(createItemCommand);
+	}
+	
+	@PutMapping(path = "/items/{itemId}")
+	public ResponseEntity<Item> editItem(@RequestBody @Valid CreateItemCommand createItemCommand,
+			@PathVariable Long itemId) {
+		return this.itemService.editItem(createItemCommand, itemId);
 	}
 	
 	

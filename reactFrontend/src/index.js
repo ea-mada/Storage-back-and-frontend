@@ -13,6 +13,7 @@ import ItemsList from './components/ItemsList';
 import ItemForm from './components/ItemForm';
 import { NotFound } from './components/NotFound';
 import HeaderMenu from './components/HeaderMenu';
+import EditItemForm from './components/EditItemForm';
 
 ReactDOM.render(
   <HashRouter>
@@ -24,6 +25,7 @@ ReactDOM.render(
         <Route path='/customers/showCustomer/:customerid' component={ShowCustomer} />
         <Route path='/customers/prefillCustomer' component={Prefill} />
         <Route exact path='/items' component={ItemsList} />
+        <Route exact path='/items/:id' component={EditItemForm} />
         <Route path='/items/form' component={ItemForm} />
         <Route component={NotFound} />
       </Switch>
