@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import {Form, Input, Button, message, Select} from 'antd';
 const {Option} = Select;
+
+import { withRouter } from 'react-router-dom';
   
   class ItemsForm extends React.Component {
     
@@ -24,6 +26,19 @@ const {Option} = Select;
             unitsOfMeasurement: response.data
           })
         })
+
+        if (this.props.id !== 'form') {
+          axios.get('/items/getItem/'+ this.props.id)
+        .then((res) => {
+          this.props.form.setFieldsValue({
+            name: res.data.name,
+            category: res.data.category,
+            price: res.data.price,
+            unitOfMeasurement: res.data.unitOfMeasurement
+          });
+          
+        });
+        }
     }
 
     handleSubmit = (e) => {
@@ -31,11 +46,21 @@ const {Option} = Select;
       this.props.form.validateFields((err, values) => {
         if (!err) {
           console.log('Received values of form: ', values);
-          axios.post('/items/addItem', values)
+
+          if (this.props.id === 'form') {
+            axios.post('/items/addItem', values)
           .then(()=>{
             message.info(`Item ${values.name} was submited.`)
             this.props.history.push('/items')
           })
+          } else {
+            axios.put('/items/'+ this.props.id, values)
+          .then(()=>{
+            message.info(`Item ${values.name} was edited.`)
+            this.props.history.push('/items')
+          })
+          }
+          
         }
       });
       
@@ -110,4 +135,4 @@ const {Option} = Select;
   }
   
   const ItemForm = Form.create()(ItemsForm);
-  export default ItemForm;
+  export default withRouter(ItemForm);
