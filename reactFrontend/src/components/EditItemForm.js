@@ -24,7 +24,17 @@ const {Option} = Select;
             unitsOfMeasurement: response.data
           })
         })
-        console.log(this.props.match.params.id);
+        
+        axios.get('/items/getItem/'+ this.props.match.params.id)
+        .then((res) => {
+          this.props.form.setFieldsValue({
+            name: res.data.name,
+            category: res.data.category,
+            price: res.data.price,
+            unitOfMeasurement: res.data.unitOfMeasurement
+          });
+          
+        });
     }
 
     handleSubmit = (e) => {
@@ -32,7 +42,7 @@ const {Option} = Select;
       this.props.form.validateFields((err, values) => {
         if (!err) {
           console.log('Received values of form: ', values);
-          axios.put('/items'+ this.props.match.params.id, values)
+          axios.put('/items/'+ this.props.match.params.id, values)
           .then(()=>{
             message.info(`Item ${values.name} was edited.`)
             this.props.history.push('/items')
